@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
 //Los traje yo.
-const getPokemonsRoutes = require('./routes/getPokemons/getPokemons')
+const getPokemonsRoutes = require('./routes/pokemonsRoutes')
 const getTypes = require('./routes/getTypes')
 
 require('./db.js');
@@ -27,7 +27,7 @@ server.use((req, res, next) => {
 });
 
 //Uso middlewares para modularizar las rutas.
-// server.use('/pokemons', getPokemonsRoutes);
+server.use('/pokemons', getPokemonsRoutes);
 server.use('/types', getTypes);
 
 // Error catching endware.
