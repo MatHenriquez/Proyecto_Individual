@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
+
 const sequelize = new Sequelize(
    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`,
    {
@@ -47,9 +48,6 @@ const { Pokemon, Type } = sequelize.models;
 Pokemon.belongsToMany(Type, { through: 'Pokemon_Type' });
 Type.belongsToMany(Pokemon, { through: 'Pokemon_Type' });
 
-// ¿?
-// Pokemon(sequelize);
-// Type(sequelize);
 
 module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

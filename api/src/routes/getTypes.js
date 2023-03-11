@@ -9,21 +9,46 @@
 
 const { getApiData } = require('../controllers/saveApiData');
 const { Router } = require("express");
+const { Type } = require('../db');
 
 const typesRouter = Router();
 
-typesRouter.get('/types', (req, res) => {
+typesRouter.get('/typesAPI', async (req, res) => {
 
-    // Dentro del callback de la ruta, obtener los tipos desde la función getApiData.
+    try {
+        const types = [];
+        // Dentro del callback de la ruta, obtener los tipos desde la función getApiData.
+        await getApiData().then((PokeInfo) => {
+        types = [...new Set(PokeInfo.map((pokemon) => pokemon.types).flat())];
+        },
+        
+        await Type.bulkCreate(types));
 
-    getApiData().then((PokeInfo) => {
-        const types = [...new Set(PokeInfo.map((pokemon) => pokemon.types).flat())];
-        });
+        res.status(201).json(types);
 
-    //Acá código para guardar los tipos en una base de datos usando sequelize. 
-    res.status(201).json(types);
-})
+    } catch (error) {
+        return res.send(error);
+    }
+    
+});
+
+typesRouter.get('/typesDB', async (req, res) => {
+
+    try {
+
+        const tipos = await Type.findAll();
+
+        return res.json(tipos);
+
+    } catch (error) {
+
+        return res.send(error);
+
+    }
+    
+});
 
 
+module.exports = typesRouter;
 
 

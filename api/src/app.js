@@ -27,7 +27,7 @@ server.use((req, res, next) => {
 });
 
 //Uso middlewares para modularizar las rutas.
-server.use('/pokemons', getPokemonsRoutes)
+// server.use('/pokemons', getPokemonsRoutes);
 server.use('/types', getTypes);
 
 // Error catching endware.
