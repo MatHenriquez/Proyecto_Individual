@@ -1,47 +1,67 @@
 
 
-// Este código importa getApiData desde el archivo getApiData.js y lo ejecuta para obtener la información de todos los pokémon. Luego, utiliza el método map para crear un nuevo array que contenga solo los tipos de cada pokemon. flat se utiliza para "aplanar" este array de arrays y new Set se utiliza para eliminar duplicados. 
-
-const { getApiData } = require('../controllers/saveApiData');
 const { Router } = require("express");
-const { Type } = require('../db');
+const { Type } = require('../DataBase/models/Type');
+const axios = require('axios');
 
 const typesRouter = Router();
 
-typesRouter.get('/typesAPI', async (req, res) => {
+const typesUrl = 'https://pokeapi.co/api/v2/type/';
 
-    try {
-        const types = [];
-        // Dentro del callback de la ruta, obtener los tipos desde la función getApiData.
-        await getApiData().then((PokeInfo) => {
-        types = [...new Set(PokeInfo.map((pokemon) => pokemon.types).flat())];
-        },
+// //¿Uso async await?
+// axios.get(typesUrl)
+//     .then((response) => {
+//         const types = response.data.results;
+//         types.forEach((type) => {
+//             Type.create({
+//                 name: type.name
+//             });
+//         });
+//     })
+//     .catch((err) => res.json('Error getting types', err));
+
+// // typesRouter.get('/typesAPI', async (req, res) => {
+
+// //     try {
+// //         const types = [];
+// //         // Dentro del callback de la ruta, obtener los tipos desde la función getApiData.
+// //         await getApiData().then((PokeInfo) => {
+// //         types = [...new Set(PokeInfo.map((pokemon) => pokemon.types).flat())];
+// //         },
         
-        await Type.bulkCreate(types));
+// //         await Type.bulkCreate(types));
 
-        res.status(201).json(types);
+// //         res.status(201).json(types);
 
-    } catch (error) {
-        return res.send(error);
-    }
+// //     } catch (error) {
+// //         return res.send(error);
+// //     }
     
-});
+// // });
+// typesRouter.get('/types', async (req, res) => {
+//     await Type.findAll()
+//         .then((types) => {
+//             const typeNames = types.map((type) => type.name);
+//             res.send(typeNames);
+//         })
+//         .catch((err) => console.log('Error getting types', err));
+// });
 
-typesRouter.get('/typesDB', async (req, res) => {
+// typesRouter.get('/types', async (req, res) => {
 
-    try {
+//     try {
 
-        const tipos = await Type.findAll();
+//         const tipos = await Type.findAll();
 
-        return res.json(tipos);
+//         return res.json(tipos);
 
-    } catch (error) {
+//     } catch (error) {
 
-        return res.send(error);
+//         return res.send(error);
 
-    }
+//     }
     
-});
+// });
 
 
 module.exports = typesRouter;

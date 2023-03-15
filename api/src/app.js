@@ -4,11 +4,8 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
-//Los traje yo.
-const getPokemonsRoutes = require('./routes/pokemonsRoutes')
-const getTypes = require('./routes/getTypes')
 
-require('./db.js');
+require('./DataBase/db.js');
 
 const server = express();
 
@@ -26,9 +23,7 @@ server.use((req, res, next) => {
   next();
 });
 
-//Uso middlewares para modularizar las rutas.
-server.use('/pokemons', getPokemonsRoutes);
-server.use('/types', getTypes);
+server.use('/', routes);
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
