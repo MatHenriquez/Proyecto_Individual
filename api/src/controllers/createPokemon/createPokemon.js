@@ -17,11 +17,11 @@ async function createPokemon(req, res){
       Peso
     });
     
-    // Asocia los tipos al pokemon
-    // const tiposEncontrados = await Type.findAll({
-    //   where: { Nombre: tipos }
-    // });
-    // await pokemon.addTypes(tiposEncontrados);
+    // Asocia los tipos al pokemon.
+    const tiposEncontrados = await Type.findAll({
+      where: { Nombre: tipos }
+    });
+    await pokemon.addTypes(tiposEncontrados);
     
     res.status(201).json(pokemon);
   } catch (error) {
