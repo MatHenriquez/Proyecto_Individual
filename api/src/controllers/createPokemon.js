@@ -1,5 +1,5 @@
-const { Pokemon, Type } = require('../../DataBase/db');
-const getApiTypes = require('../getTypes/saveAPiTypes');
+const { Pokemon, Type } = require('../db');
+const getApiTypes = require('../utils/saveApiTypes');
 
 
 async function createPokemon(req, res){
@@ -25,9 +25,7 @@ async function createPokemon(req, res){
         if (typeCount === 0) { //Verifico si ya está cargado el modelo.
             await getApiTypes();
         }
-        const types = await Type.findAll({
-            attributes: ['ID', 'Nombre'],
-        });
+        
     // Asocia los tipos al pokemon.
     const tiposEncontrados = await Promise.all(
       tipos.map(async (tipo) => {

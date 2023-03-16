@@ -1,5 +1,5 @@
-const getApiTypes = require('./saveAPiTypes');
-const { Type } = require('../../DataBase/db');
+const getApiTypes = require('../utils/saveApiTypes');
+const { Type } = require('../db');
 
 async function getTypes (req, res){
     try {

@@ -50,6 +50,10 @@ module.exports = (sequelize) => {
     Peso: {
       type: DataTypes.FLOAT
     }
+  },{
+    timestamps: false
   });
   
 };
+
+//Agregar identificador de que fue creado por el user.
