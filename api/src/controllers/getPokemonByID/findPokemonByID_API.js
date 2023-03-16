@@ -18,6 +18,7 @@ async function getPokemonById(req, res){
         Ataque: apiPokemon.stats.find((stat) => stat.stat.name === 'attack').base_stat,
         Defensa: apiPokemon.stats.find((stat) => stat.stat.name === 'defense').base_stat,
         Velocidad: apiPokemon.stats.find((stat) => stat.stat.name === 'speed').base_stat,
+        Tipos: apiPokemon.types.map((type) => type.type.name)
       };
       
         // Si el pokemon fue encontrado, devolver sus datos en un objeto JSON.
