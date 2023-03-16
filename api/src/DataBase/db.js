@@ -49,9 +49,6 @@ const { Pokemon, Type } = sequelize.models;
 Pokemon.belongsToMany(Type, { through: 'PokemonType' });
 Type.belongsToMany(Pokemon, { through: 'PokemonType' });
 
-// Pokemon.prototype.addTypes = async function(types) {
-//    await this.addTypes(types);
-//  };
 
 module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

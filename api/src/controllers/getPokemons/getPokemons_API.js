@@ -10,12 +10,13 @@ async function getAllPokemons_API(req, res){
       let pokemons = [];
       let nextUrl = 'https://pokeapi.co/api/v2/pokemon';
 
-      while(nextUrl){
+      while(nextUrl && pokemons.length < 160) {
         const response = await axios.get(nextUrl);
         const pokemonsData = response.data.results;
         const pokemonPromises = pokemonsData.map(async (pokemonData) => {
-          const pokemonDetails = await axios.get(pokemonData.url);
-          const pokemon = pokemonDetails.data;
+        const pokemonDetails = await axios.get(pokemonData.url);
+        const pokemon = pokemonDetails.data;
+
           return {
             ID: pokemon.id,
             Nombre: pokemon.name,
@@ -30,11 +31,15 @@ async function getAllPokemons_API(req, res){
         });
 
         const pokemonsPage = await Promise.all(pokemonPromises);
+
+        //Guardo de a 20 pokemons hasta los 160.
         pokemons.push(...pokemonsPage);
         nextUrl = response.data.next;
       }
-      
-      res.json(pokemons);
+
+      //Guardo sólo los primeros 151 pokemons.
+      const kantoPokemons = pokemons.slice(0, 151); //151 porque slice() no incluye el último índice.
+      res.json(kantoPokemons);
     } else {
       //Busco el pokemon en la API.
       const nombre = name? name.trim().toLowerCase() : null;

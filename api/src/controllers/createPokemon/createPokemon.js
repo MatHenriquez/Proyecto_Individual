@@ -49,7 +49,7 @@ async function createPokemon(req, res){
       Velocidad,
       Altura,
       Peso,
-      tipos: tiposEncontrados
+      Tipos: tiposEncontrados
     });
   } catch (error) {
     console.error(error);

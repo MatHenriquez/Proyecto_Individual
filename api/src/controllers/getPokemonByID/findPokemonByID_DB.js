@@ -1,4 +1,4 @@
-const { Pokemon, Type } = require('../../DataBase/db'); 
+const { Pokemon, Type} = require('../../DataBase/db'); 
 async function getPokemonById(req, res){
 
     const { idPokemon } = req.params;
@@ -6,17 +6,17 @@ async function getPokemonById(req, res){
     try {
       
         const pokemon = await Pokemon.findByPk(idPokemon, {
-        include: {
-        model: Type,
-        attributes: ['name'],
-        through: { attributes: [] } // Para excluir la tabla intermedia "pokemon_types".
-        }
+          include: {
+            model: Type,
+            attributes: ['ID', 'Nombre'],
+            through: { attributes: [] } // Para excluir la tabla intermedia "pokemonType".
+          }
         })
         res.json(pokemon)
     }
       catch (error) {
         
-      res.status(404).json({ message: 'Pokemon not found' });
+      res.json({ message: 'Pokemon not found' });
     }
   }
   
