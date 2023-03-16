@@ -52,7 +52,6 @@ async function createPokemon(req, res){
       Tipos: tiposEncontrados
     });
   } catch (error) {
-    console.error(error);
     res.status(500).send('Hubo un error al crear el pokemon.');
   };
 }

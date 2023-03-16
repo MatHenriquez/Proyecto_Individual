@@ -59,7 +59,6 @@ async function getAllPokemons_API(req, res){
     res.json(foundedPokemon);
     }
     } catch (error) {
-      console.error(error);
       res.status(404).send('Pokemon not found.');
     };
 }
