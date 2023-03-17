@@ -1,23 +1,23 @@
-const getAllPokemons = require('../utils/getAllPokemons')
+const getApiPokemons = require('../utils/getApiPokemons');
+const getDbPokemons = require('../utils/getDbPokemons');
 
+async function searchByName(name){
 
-async function searchByName(req, res){
-
-  const {name} = req.query;
-
-    try {
+    
         if(!name) throw new Error('Debe ingresar un nombre.');
 
-        const myPokemons = await getAllPokemons();
+        const apiPokemons = await getApiPokemons();
+        const dbPokemons = await getDbPokemons();
 
-        // Buscar los objetos en el arreglo myPokemons cuyo atributo Nombre sea igual al valor de name que llega por query
-        const foundPokemons = myPokemons.filter(pokemon => pokemon.Nombre.toLowerCase() === name.toLowerCase());
+        const myPokemons = [...apiPokemons, ...dbPokemons];
 
-        res.json(foundPokemons);
+        // Buscar los objetos en el arreglo myPokemons cuyo atributo Nombre incluya al valor de name que llega por query
+        const foundedPokemons = myPokemons.filter(pokemon => pokemon.Nombre.toLowerCase().includes(name.toLowerCase()));
 
-        } catch (error) {
-            res.send(error.message);
-    };
+        if(!foundedPokemons) throw new Error(`El pokemon ${name} no existe.`)
+        return(foundedPokemons);
+
+        
 }
 
 

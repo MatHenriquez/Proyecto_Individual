@@ -1,8 +1,6 @@
 const axios = require('axios');
-const { Pokemon } = require('../db')
 
-async function getAllPokemons() {
-  try {
+async function getApiPokemons() {
     let apiPokemons = [];
     let nextUrl = 'https://pokeapi.co/api/v2/pokemon';
 
@@ -37,21 +35,9 @@ async function getAllPokemons() {
     // Guardo sólo los primeros 151 pokemons.
     const kantoPokemons = apiPokemons.slice(0, 151);
 
-    // Obtengo todos los pokemons de la DB, verificando primero que no esté vacía, así no lanza un error.
-    let dbPokemons = [];
-    if (typeof Pokemon !== 'undefined') {
-      dbPokemons = await Pokemon.findAll({
-        attributes: ['ID', 'Nombre', 'Imagen', 'Vida', 'Ataque', 'Defensa', 'Velocidad', 'Altura', 'Peso'],
-      });
-    }
+    return kantoPokemons;
 
-    const allPokemons = [...kantoPokemons, ...dbPokemons];
-
-    return allPokemons;
-
-  } catch (error) {
-    return error;
-  }
+ 
 }
 
-module.exports = getAllPokemons;
+module.exports = getApiPokemons;

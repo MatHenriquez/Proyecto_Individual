@@ -2,11 +2,12 @@ const { Pokemon, Type } = require('../db');
 const getApiTypes = require('../utils/saveApiTypes');
 
 
-async function createPokemon(req, res){
+async function createPokemon(Nombre, Imagen, Vida, Ataque, Defensa, Velocidad, Altura, Peso, tipos){
 
-  const { Nombre, Imagen, Vida, Ataque, Defensa, Velocidad, Altura, Peso, tipos } = req.body;
-  
-  try {
+
+    if(!Nombre || !Imagen || !Vida || !Ataque || !Defensa || !Velocidad || !Altura || !Peso || !tipos) {
+      throw new Error ('Datos faltantes.');
+    }
     // Crea el pokemon
     const pokemon = await Pokemon.create({
       Nombre,
@@ -37,8 +38,8 @@ async function createPokemon(req, res){
       })
     );
     await pokemon.addTypes(tiposEncontrados);
-    
-    res.status(201).json({
+
+    const createdPokemon = {
       Nombre,
       Imagen,
       Vida,
@@ -48,10 +49,15 @@ async function createPokemon(req, res){
       Altura,
       Peso,
       Tipos: tiposEncontrados
-    });
-  } catch (error) {
-    res.status(500).send('Hubo un error al crear el pokemon.');
-  };
+    }
+    
+    if(!createdPokemon){
+      throw new Error('Error al crear el pokemon.')
+    }
+
+    return createdPokemon;
+
+ 
 }
 
 module.exports = createPokemon;

@@ -1,26 +1,29 @@
-const getAllPokemons = require('../utils/getAllPokemons');
+const getApiPokemons = require('../utils/getApiPokemons');
+const getDbPokemons = require('../utils/getDbPokemons');
 
-async function getPokemonById(req, res){
+async function getPokemonById(idPokemon){
 
-  const { idPokemon } = req.params;
+      if(!idPokemon) throw new Error('No se ingresó un id.');
 
-  try {
+      const apiPokemons = await getApiPokemons();
+      const dbPokemons = await getDbPokemons();
 
-    if(!idPokemon) throw new Error('ID inválido.');
+      const foundedApiPokemon = apiPokemons.filter(pokemon => pokemon.ID == idPokemon);
+      const foundedDbPokemon = dbPokemons.filter(pokemon => pokemon.ID == idPokemon);
 
-    const pokemons = await getAllPokemons();
 
-    const foundedPokemon = pokemons.filter(pokemon => pokemon.ID == idPokemon);
-
-    if(foundedPokemon.length === 0) throw new Error('Pokemon not found.');
-    // Si el pokemon fue encontrado, devolver sus datos en un objeto JSON.
-    res.json(foundedPokemon);
-    
-    }
-  catch (error) {
+        // Verificamos si encontramos algún Pokémon
+      if(foundedApiPokemon.length > 0){
+        return foundedApiPokemon;
+      } else if(foundedDbPokemon.length > 0){
+        return foundedDbPokemon;
+      } else {
+        throw new Error(`El pokemon con id ${idPokemon} no fue encontrado.`)
+      }
       
-    res.json(error.message);
   }
-}
+
+  
+
 
 module.exports = getPokemonById;

@@ -2,7 +2,6 @@ const axios = require('axios');
 const { Type } = require('../db');
 
 async function getApiTypes() {
-  try {
     let url = 'https://pokeapi.co/api/v2/type';
     let types = [];
 
@@ -18,9 +17,9 @@ async function getApiTypes() {
     for (const name of uniqueTypes) {
       await Type.create({ Nombre: name });
     }
-  } catch (error) {
-    return error;
-  }
+
+    return;
+    
 }
 
 module.exports = getApiTypes;
