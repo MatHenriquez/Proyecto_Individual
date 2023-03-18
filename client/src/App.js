@@ -1,7 +1,7 @@
 import './App.css';
 
 //Imports hechos por mí.
-import { Switch, Route } from "react-router-dom";
+import {  Route } from "react-router-dom";
 import Detail from './components/Detail';
 import Form from './components/Form';
 import Home from './components/Home';
@@ -16,13 +16,13 @@ function App() {
 
       <Nav />      
 
-      <Switch>
+   
         <Route exact path = '/' element = {<Landing />} />
         <Route exact path = '/home' element = {<Home />} />
         <Route exact path = '/detail/:idPokemon' element = {<Detail />} />
         <Route exact path = '/form' element = {<Form />} />
         <Route exact path = '*' element = {<NotFound />} />
-      </Switch>
+   
     </div>
   );
 }
