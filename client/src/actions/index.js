@@ -7,7 +7,8 @@ import {
     GET_POKEMONS_BY_NAME,
     ORDER_POKEMONS_BY_ATTACK,
     ORDER_POKEMONS_BY_NAME, 
-    FILTER_POKEMONS
+    FILTER_POKEMONS,
+    CREATE_POKEMON
 } from './types'
 
 import axios from 'axios';
@@ -18,7 +19,7 @@ const URL = 'http://localhost:3001';
 //Función que muestra los pokemons de la API y la DB.
 export function getPokemons(){
     return async function(dispatch){
-        axios
+        await axios
         .get(`${URL}/pokemons`)
         .then((response) =>{
             return dispatch({
@@ -33,7 +34,7 @@ export function getPokemons(){
 //Función que busca un pokemon por id.
 export function getPokemonDetails(id){
     return async function(dispatch){
-        axios
+        await axios
         .get(`${URL}/pokemons/${id}`)
         .then((response) =>{
             return dispatch({
@@ -48,7 +49,7 @@ export function getPokemonDetails(id){
 //Función que busca un pokemon por su nombre.
 export function getPokemonByName(name){
     return async function(dispatch){
-        axios
+        await axios
         .get(`${URL}/pokemons/name?name=${name}`)
         .then((response) =>{
             return dispatch({
@@ -75,6 +76,22 @@ export function getPokemonsTypes(){
     };
 };
 
+
+//Función que crea un pokemon.
+export function createPokemon(){
+    return async function(dispatch){
+        await axios
+        .post(`${URL}/pokemons`)
+        .then((response) =>{
+            return dispatch({
+                type: CREATE_POKEMON,
+                payload: response.data
+            });
+        })
+        .catch(error => console.log(error));
+    };
+};
+
 //Función que ordena pokemons por ataque según un criterio ascendente o descendente.
 export function sortPokemonsByAttack(criterion){
     return dispatch({
@@ -84,7 +101,7 @@ export function sortPokemonsByAttack(criterion){
 };
 
 //Función que ordena pokemons por nombre alfabéticamente según un criterio ascendente o descendente.
-export function sortPokemonsName(criterion){
+export function sortPokemonsByName(criterion){
     return dispatch({
         type: ORDER_POKEMONS_BY_NAME,
         payload: criterion
