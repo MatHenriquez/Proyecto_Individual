@@ -94,7 +94,7 @@ export function createPokemon(){
 
 //Función que ordena pokemons por ataque según un criterio ascendente o descendente.
 export function sortPokemonsByAttack(criterion){
-    return dispatch({
+    return ({
         type: ORDER_POKEMONS_BY_ATTACK,
         payload: criterion
     });
@@ -102,7 +102,7 @@ export function sortPokemonsByAttack(criterion){
 
 //Función que ordena pokemons por nombre alfabéticamente según un criterio ascendente o descendente.
 export function sortPokemonsByName(criterion){
-    return dispatch({
+    return ({
         type: ORDER_POKEMONS_BY_NAME,
         payload: criterion
     });
@@ -110,7 +110,7 @@ export function sortPokemonsByName(criterion){
 
 //Función que filtra pokemons basada en su origen (API o DB) o en sus tipos.
 export function filterPokemons(criterion){
-    return dispatch({
+    return ({
         type: FILTER_POKEMONS,
         payload: criterion
     });
