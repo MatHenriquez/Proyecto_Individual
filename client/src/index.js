@@ -4,9 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//Imports que yo hice.
+import { Provider } from 'react-redux';
+import store from './store/index';
+import { BrowserRouter } from "react-router-dom";
+
+
+//Encierro la App con el BrowserRouter y a eso, con el Provider de Redux.
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store = {store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter> 
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
