@@ -7,7 +7,8 @@ import {
     GET_POKEMONS_BY_NAME,
     ORDER_POKEMONS_BY_ATTACK,
     ORDER_POKEMONS_BY_NAME, 
-    FILTER_POKEMONS,
+    FILTER_POKEMONS_BY_ORIGIN,
+    FILTER_POKEMONS_BY_TYPE,
     CREATE_POKEMON
 } from './types'
 
@@ -108,12 +109,20 @@ export function sortPokemonsByName(criterion){
     });
 };
 
-//Función que filtra pokemons basada en su origen (API o DB) o en sus tipos.
-export function filterPokemons(criterion){
+//Función que filtra pokemons basada en su origen (API o DB).
+export function filterPokemonsByOrigin(criterion){
     return ({
-        type: FILTER_POKEMONS,
+        type: FILTER_POKEMONS_BY_ORIGIN,
         payload: criterion
     });
 };
+
+//Función que filtra pokemons basada en sus tipos.
+export function filterPokemonsByType(criterion){
+    return ({
+        type: FILTER_POKEMONS_BY_TYPE,
+        payload: criterion
+    });
+}
 
 

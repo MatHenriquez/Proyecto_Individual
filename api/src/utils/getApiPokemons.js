@@ -22,6 +22,7 @@ async function getApiPokemons() {
           Velocidad: pokemon.stats[5].base_stat,
           Altura: pokemon.height,
           Peso: pokemon.weight,
+          Types: pokemon.types.map((type) => type.type.name),
         };
       });
 

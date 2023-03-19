@@ -25,7 +25,15 @@ async function getDbPokemons(){
         });
         }
 
-        
+        //Añado a cada pokemon del arreglo dbPokemon, sus tipos correspondientes.
+        dbPokemons = dbPokemons.map((pokemon) => {
+            const typesNames = pokemon.Types.map((type) => type.Nombre);
+            return {
+                ...pokemon.toJSON(),
+                Types: typesNames,
+            };
+        });
+
 
         //Añado a cada pokemon del arreglo dbPokemon, sus tipos correspondientes.
 
