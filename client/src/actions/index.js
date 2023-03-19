@@ -110,18 +110,18 @@ export function sortPokemonsByName(criterion){
 };
 
 //Función que filtra pokemons basada en su origen (API o DB).
-export function filterPokemonsByOrigin(criterion){
+export function filterPokemonsByOrigin(origin){
     return ({
         type: FILTER_POKEMONS_BY_ORIGIN,
-        payload: criterion
+        payload: origin
     });
 };
 
 //Función que filtra pokemons basada en sus tipos.
-export function filterPokemonsByType(criterion){
+export function filterPokemonsByType(type){
     return ({
         type: FILTER_POKEMONS_BY_TYPE,
-        payload: criterion
+        payload: type
     });
 }
 
