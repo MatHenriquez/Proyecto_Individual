@@ -25,7 +25,8 @@ const reducer = (state = initialState, action) => {
         case GET_POKEMONS:
             return {
                 ...state,
-                loadedPokemons: action.payload
+                loadedPokemons: action.payload,
+                filteredPokemons: action.payload
             };
 
         case GET_POKEMON_DETAILS:
@@ -81,7 +82,7 @@ const reducer = (state = initialState, action) => {
                 };
             } else if (action.payload === 'api'){
 
-                const apiPokemons = state.loadedPokemons.filter(
+                const apiPokemons = [...state.loadedPokemons].filter(
                     (pokemon) => typeof pokemon.ID === 'string'
                 )
                 return {
@@ -100,7 +101,14 @@ const reducer = (state = initialState, action) => {
             }
 
             case FILTER_POKEMONS_BY_TYPE:
-                const typePokemons = state.loadedPokemons.filter((pokemon) =>
+
+                if(action.payload === 'all'){
+                    return {
+                        ...state,
+                        filteredPokemons: state.loadedPokemons
+                    }
+                }
+                const typePokemons = [...state.loadedPokemons].filter((pokemon) =>
                         pokemon.Types.some((type) => type === action.payload)
                     );
                 return{

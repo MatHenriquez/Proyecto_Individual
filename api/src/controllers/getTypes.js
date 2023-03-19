@@ -3,8 +3,6 @@ const { Type } = require('../db');
 
 async function getTypes (){
     
-    console.log("holis");
-
         //Verifico que la tabla de types esté cargada, sino la crea.
 
         const typeCount = await Type.count();

@@ -17,7 +17,7 @@ import axios from 'axios';
 const URL = 'http://localhost:3001';
 
 
-//Función que muestra los pokemons de la API y la DB.
+// Función que muestra los pokemons de la API y la DB.
 export function getPokemons(){
     return async function(dispatch){
         await axios
@@ -31,6 +31,9 @@ export function getPokemons(){
         .catch(error => console.log(error));
     };
 };
+
+
+  
 
 //Función que busca un pokemon por id.
 export function getPokemonDetails(id){
@@ -70,7 +73,7 @@ export function getPokemonsTypes(){
         .then((response) =>{
             return dispatch({
                 type: GET_POKEMONS_TYPES,
-                payload: response.data
+                payload: [...response.data.map((type) => type.Nombre)]
             });
         })
         .catch(error => console.log(error));
