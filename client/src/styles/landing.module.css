@@ -1,5 +1,36 @@
-.fondo {
-    /* background-image: url('../resources/landing.jpg'); */
-    background-color: brown;
+.background {
+    background-image: url('../resources/landing_3.png');
+    background-size: cover;
+    min-height: 100vh;
 }
 
+.title {
+    padding: 2%;
+    color: #FFEA00;
+    
+}
+
+.btn {
+    background-color: #FFEA00;
+    color: #FF7B00;
+    border: 2px solid #FF7B00;
+    font-weight: bold;
+    font-size: larger;
+    padding: 5px;
+    border-radius: 15%;
+    width: 7%;
+    height: 50px;
+    position: absolute;
+    top: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.btn:hover{
+    background-color: #FF7B00;
+    color: #FFEA00;
+    cursor: pointer;
+    border: 2px solid #FFEA00;
+}
