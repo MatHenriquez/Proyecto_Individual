@@ -83,16 +83,17 @@ const reducer = (state = initialState, action) => {
             } else if (action.payload === 'api'){
 
                 const apiPokemons = [...state.loadedPokemons].filter(
-                    (pokemon) => typeof pokemon.ID === 'string'
+                    (pokemon) => typeof pokemon.ID === 'number'
                 )
                 return {
                     ...state,
                     filteredPokemons: apiPokemons,
                 };
+
             } else {
 
-                const dbPokemons = state.loadedPokemons.filter(
-                    (pokemon) => typeof pokemon.ID === 'number'
+                const dbPokemons = [...state.loadedPokemons].filter(
+                    (pokemon) => typeof pokemon.ID !== 'number'
                 )
                 return {
                     ...state,

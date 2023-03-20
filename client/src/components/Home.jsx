@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch , useSelector} from "react-redux";
+import loadingImg from '../resources/loading.gif';
+import styles from '../styles/home.module.css';
+import Pagination from './Pagination'
 
 
 import { 
@@ -28,10 +31,23 @@ export default function Home(){ //¿props?
 
     const types = useSelector((state) => state.pokemonTypes);
 
+    const [loading, setLoading] = useState (false);
+
+    //PAGINADO:
+  const [currentPage, setCurrentPage]= useState(1) //Mi página actual que arraca en 1.
+  const [pokemonsPerPage, setPokemonsPerPage]= useState(12) // Mis pokemons por página que son 12.
+  const indexOfLastPokemon = currentPage * pokemonsPerPage;
+  const indexOfFirstPokemon= indexOfLastPokemon - pokemonsPerPage;
+  const currentPokemons = Array.isArray(pokemons) ? pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) : [];  //Constante que guarda todos los pokemons que voy a tener por pagina.
+
+  
+
     useEffect(() => {
 
-        dispatch(getPokemons());
-        dispatch(getPokemonsTypes());
+      setLoading(true);
+      dispatch(getPokemons())
+        .finally(() => setLoading(false));
+      dispatch(getPokemonsTypes());
 
       }, [dispatch]);
 
@@ -63,15 +79,19 @@ export default function Home(){ //¿props?
         dispatch(sortPokemonsByAttack(event.target.value));
       }
 
+
+      const pagination = (pageNumber) =>{  
+        setCurrentPage(pageNumber)
+       }
       
     return <div>
-        <h1>Buenas, soy la home</h1>
+        <h1>Pokedex:</h1>
         <div>
       <Link to='/form'>Crea tu propio pokemon.</Link>
       
-      <button onClick={(event) => handleClick(event)}>
+      {/* <button onClick={(event) => handleClick(event)}>
         Todos los pokemons.
-      </button>
+      </button> */}
 
       <div>
         <select>
@@ -95,16 +115,37 @@ export default function Home(){ //¿props?
         </select>
         </div>
         </div>
-        {pokemons?.map((pokemon) => {
-        return (
-          <Card
-            key={pokemon.ID}
-            id={pokemon.ID}
-            name={pokemon.Nombre}
-            image={pokemon.Imagen}
-            types={pokemon.Types}
-          />
-        );
-      })}
+        
+        <Pagination  
+          pokemonsPerPage={pokemonsPerPage}
+          pokemons={pokemons}
+          pagination={pagination}
+        />    
+       
+    {loading ? (
+        <div>
+        <h2>Loading...</h2>
+        <img src={loadingImg} alt='loadingImg' />
+        </div>
+      ) : (
+        <div className={styles.CardsContainer}>
+          {currentPokemons?.map((pokemon) => (
+            
+              <Card 
+                key={pokemon.ID} 
+                id={pokemon.ID} 
+                name={pokemon.Nombre} 
+                image={pokemon.Imagen} 
+                types={pokemon.Types} 
+              />
+            
+
+          ))}
+        </div>
+      )}
+    
+   
+      
     </div>
 }
+

@@ -1,0 +1,8 @@
+.Card{
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: pink;
+}
