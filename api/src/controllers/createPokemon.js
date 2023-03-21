@@ -5,7 +5,7 @@ const getApiTypes = require('../utils/saveApiTypes');
 async function createPokemon(Nombre, Imagen, Vida, Ataque, Defensa, Velocidad, Altura, Peso, tipos){
 
 
-    if(!Nombre || !Imagen || !Vida || !Ataque || !Defensa || !Velocidad || !Altura || !Peso || !tipos) {
+    if(!Nombre || !Imagen || !Vida || !Ataque || !Defensa || !Velocidad || !Altura || !Peso || tipos.length === 0) {
       throw new Error ('Datos faltantes.');
     }
     // Crea el pokemon

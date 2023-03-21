@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
         case GET_POKEMON_DETAILS:
             return {
                 ...state,
-                pokemonDetail: action.payload
+                searchedPokemons: action.payload
             };
 
         case GET_POKEMONS_TYPES:

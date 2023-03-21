@@ -1,12 +1,13 @@
-import styles from '../styles/card.module.css'
+import styles from '../styles/card.module.css';
 
-export default function Card({id,name, image, types}){
+
+export default function Card({name, image, types}){
 
       return (
 
+       
                 <div className={styles.Card}>
                     <h3>{name}</h3>
-                    <h3>{id}</h3>
                     <img src={image} alt={name}/>
                     <div>
                         <h4>Tipos:</h4>
@@ -15,5 +16,6 @@ export default function Card({id,name, image, types}){
                         }
                     </div>
                 </div>
+ 
       )
 }

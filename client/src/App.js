@@ -22,7 +22,7 @@ function App() {
       <Switch>
         <Route exact path = '/'><Landing /></Route>
         <Route exact path = '/home'><Home /></Route>
-        <Route exact path = '/detail/:idPokemon'><Detail /></Route>
+        <Route exact path = '/detail/:idPokemon'><Detail/></Route>
         <Route exact path = '/form'><Form /></Route>
         <Route path = '/*'><NotFound /></Route>
       </Switch>

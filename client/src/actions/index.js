@@ -41,9 +41,10 @@ export function getPokemonDetails(id){
         await axios
         .get(`${URL}/pokemons/${id}`)
         .then((response) =>{
-            return dispatch({
-                type: GET_POKEMON_DETAILS,
-                payload: response.data
+            return dispatch(
+                {
+                    type: GET_POKEMON_DETAILS,
+                    payload: response.data
             });
         })
         .catch(error => console.log(error));
