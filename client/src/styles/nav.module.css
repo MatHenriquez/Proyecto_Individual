@@ -1,0 +1,23 @@
+.nav{
+    display: flex;
+    justify-content: space-around;
+    background-color: red;
+    padding: 10px;
+}
+
+.btn {
+    background-color: #FFEA00;
+    color: #FF7B00;
+    border: 2px solid #FF7B00;
+    font-weight: bold;
+    font-size: larger;
+    padding: 5px;
+    border-radius: 15%;
+}
+
+.btn:hover{
+    background-color: #FF7B00;
+    color: #FFEA00;
+    cursor: pointer;
+    border: 2px solid #FFEA00;
+}

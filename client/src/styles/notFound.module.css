@@ -1,14 +1,7 @@
 .background {
-    background-image: url('../resources/landing.png');
+    background-image: url('../resources/notFoundBG.jpg');
     background-size: cover;
-    min-height: 97vh;
-    padding: 14.5px;
-}
-
-.title {
-    padding: 2%;
-    color: #FFEA00;
-    
+    min-height: 94.2vh;
 }
 
 .btn {
@@ -29,9 +22,17 @@
     margin: auto;
 }
 
-.btn:hover{
-    background-color: #FF7B00;
-    color: #FFEA00;
-    cursor: pointer;
-    border: 2px solid #FFEA00;
+.title{
+    background-color: red;
+    color: white;
+}
+
+.img {
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
 }
