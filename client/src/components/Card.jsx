@@ -1,7 +1,10 @@
 import styles from '../styles/card.module.css';
+import { Link } from "react-router-dom";
 
 
-export default function Card({name, image, types, attack}){
+
+export default function Card({id, name, image, types}){
+
 
       return (
 
@@ -14,8 +17,11 @@ export default function Card({name, image, types, attack}){
                         {
                             types.map((type, index) => <h4 key={index}>{type}</h4>)
                         }
-                        <h4>{attack}</h4>
                     </div>
+
+                    <Link to={`/detail/${id}`}>
+                        <button>Detalles</button>
+                    </Link>
                 </div>
  
       )

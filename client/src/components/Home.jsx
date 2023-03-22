@@ -138,7 +138,6 @@ export default function Home(){ //¿props?
                 name={pokemon.Nombre} 
                 image={pokemon.Imagen} 
                 types={pokemon.Types} 
-                attack = {pokemon.Ataque}
               />
             
 
