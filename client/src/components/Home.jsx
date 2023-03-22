@@ -51,13 +51,7 @@ export default function Home(){ //¿props?
 
       }, [dispatch]);
 
-   
-    
-
-      function handleClick(event) {
-        event.preventDefault();
-        dispatch(getPokemons());
-      }
+  
 
       function handleTypesFilter(event) {
         event.preventDefault();
@@ -89,23 +83,28 @@ export default function Home(){ //¿props?
         <h1>Pokedex:</h1>
         <div>
       <Link to='/form'>Crea tu propio pokemon.</Link>
-      
-      {/* <button onClick={(event) => handleClick(event)}>
-        Todos los pokemons.
-      </button> */}
 
       <div>
-        <select>
+        <span>Ordenar alfabéticamente:</span>
+        <select onChange={(event) => handleSortNames(event)}>
+          <option value="ascendent">Ascendente</option>
+          <option value="descendent">Descendente</option>
+        </select>
+
+        <span>Ordenar por Ataque:</span>
+        <select onChange={(event) => handleSortAttacks(event)}>
           <option value="ascendent">Ascendente</option>
           <option value="descendent">Descendente</option>
         </select>
         
+        <span>Filtrar por origen:</span>
         <select onClick={(event) => handleOriginFilter(event)} >
           <option value="all">Todos</option>
           <option value="api">Pokemons de la serie</option>
           <option value="db">Tus pokemons</option>
         </select>
 
+        <span>Filtrar por tipo:</span>
         <select onChange={(event) => handleTypesFilter(event)}>
           <option value ='all'>Todos los pokemons</option>
           {types?.map(type => (
@@ -139,6 +138,7 @@ export default function Home(){ //¿props?
                 name={pokemon.Nombre} 
                 image={pokemon.Imagen} 
                 types={pokemon.Types} 
+                attack = {pokemon.Ataque}
               />
             
 

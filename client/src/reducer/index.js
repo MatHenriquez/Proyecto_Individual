@@ -11,12 +11,11 @@ import {
 } from '../actions/types'
 
 const initialState = {
-    loadedPokemons: [],
-    filteredPokemons: [],
-    sortedPokemons: [],
-    pokemonTypes: [],
-    searchedPokemons: [],
-    pokemonDetail: {}
+    loadedPokemons: [], //Todos los pokemons.
+    filteredPokemons: [], //Pokemons reenderizados en home
+    originPokemons: [], //Pokemons filtrados por origen
+    pokemonTypes: [], //Todos los tipos de pokemon.
+    searchedPokemons: [] //Pokemon buscado por nombre o id.
   };
 
 const reducer = (state = initialState, action) => {
@@ -26,7 +25,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loadedPokemons: action.payload,
-                filteredPokemons: action.payload
+                filteredPokemons: action.payload,
+                originPokemons: action.payload,
             };
 
         case GET_POKEMON_DETAILS:
@@ -50,7 +50,8 @@ const reducer = (state = initialState, action) => {
         case CREATE_POKEMON: {
             return {
                 ...state,
-                loadedPokemons: [...state.loadedPokemons, action.payload]
+                loadedPokemons: [...state.loadedPokemons, action.payload],
+                filteredPokemons: [...state.loadedPokemons, action.payload]
             };
         }
 
@@ -59,9 +60,15 @@ const reducer = (state = initialState, action) => {
                 action.payload === 'ascendent'
                     ? [...state.loadedPokemons].sort((a, b) => a.Ataque - b.Ataque )
                     : [...state.loadedPokemons].sort((a, b) => b.Ataque - a.Ataque );
+            const sortedAndFilteredByAttack = 
+                action.payload === 'ascendent'
+                    ? [...state.filteredPokemons].sort((a, b) => a.Ataque - b.Ataque )
+                    : [...state.filteredPokemons].sort((a, b) => b.Ataque - a.Ataque );
             return {
                 ...state,
-                sortedPokemons: sortedPokemonsByAttack,
+                loadedPokemons: sortedPokemonsByAttack,
+                filteredPokemons: sortedAndFilteredByAttack,
+
             };
 
         case ORDER_POKEMONS_BY_NAME:
@@ -69,10 +76,17 @@ const reducer = (state = initialState, action) => {
                 action.payload === 'ascendent'
                     ? [...state.loadedPokemons].sort((a,b) => a.Nombre.toLowerCase() > b.Nombre.toLowerCase() ? 1 : -1 )
                     : [...state.loadedPokemons].sort((a,b) => a.Nombre.toLowerCase() < b.Nombre.toLowerCase() ? 1 : -1 );
+            const sortedAndFilteredByName = 
+                    action.payload === 'ascendent'
+                    ? [...state.filteredPokemons].sort((a,b) => a.Nombre.toLowerCase() > b.Nombre.toLowerCase() ? 1 : -1 )
+                    : [...state.filteredPokemons].sort((a,b) => a.Nombre.toLowerCase() < b.Nombre.toLowerCase() ? 1 : -1 );
             return {
                 ...state,
-                sortedPokemons: sortedPokemonsByName,
+                loadedPokemons: sortedPokemonsByName,
+                filteredPokemons: sortedAndFilteredByName
             };
+
+   
 
         case FILTER_POKEMONS_BY_ORIGIN:
             if(action.payload === 'all'){
@@ -84,7 +98,7 @@ const reducer = (state = initialState, action) => {
 
                 const apiPokemons = [...state.loadedPokemons].filter(
                     (pokemon) => typeof pokemon.ID === 'number'
-                )
+            )
                 return {
                     ...state,
                     filteredPokemons: apiPokemons,
