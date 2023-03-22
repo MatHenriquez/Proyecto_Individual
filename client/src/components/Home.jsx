@@ -81,8 +81,9 @@ export default function Home(){ //¿props?
 
 
       const pagination = (pageNumber) =>{  
-        setCurrentPage(pageNumber)
+        setCurrentPage(pageNumber);
        }
+
       
     return <div>
         <h1>Pokedex:</h1>
@@ -120,6 +121,7 @@ export default function Home(){ //¿props?
           pokemonsPerPage={pokemonsPerPage}
           pokemons={pokemons}
           pagination={pagination}
+          currentPage={currentPage}
         />    
        
     {loading ? (

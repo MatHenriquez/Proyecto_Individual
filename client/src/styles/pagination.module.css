@@ -1,0 +1,11 @@
+.ul{
+    display: flex;
+    text-decoration: none;
+    list-style:none;
+    justify-content: center;  
+    justify-content: space-around;
+}
+
+.li:hover{
+    cursor: pointer;
+}
