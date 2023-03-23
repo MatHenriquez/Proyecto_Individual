@@ -21,3 +21,8 @@
     cursor: pointer;
     border: 2px solid #FFEA00;
 }
+
+.searchingImg{
+    position: absolute;
+    width: 80px;
+}

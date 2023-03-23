@@ -28,7 +28,7 @@ export function getPokemons(){
                 payload: response.data
             });
         })
-        .catch(error => console.log(error));
+        .catch(error => alert(error.response.data));
     };
 };
 
@@ -47,7 +47,7 @@ export function getPokemonDetails(id){
                     payload: response.data
             });
         })
-        .catch(error => console.log(error));
+        .catch(error => alert(error.response.data));
     };
 };
 
@@ -62,7 +62,7 @@ export function getPokemonByName(name){
                 payload: response.data
             });
         })
-        .catch(error => console.log(error));
+        .catch(error => alert(error.response.data));
     };
 };
 
@@ -77,23 +77,24 @@ export function getPokemonsTypes(){
                 payload: [...response.data.map((type) => type.Nombre)]
             });
         })
-        .catch(error => console.log(error));
+        .catch(error => alert(error.response.data));
     };
 };
 
 
 //Función que crea un pokemon.
-export function createPokemon(){
+export function createPokemon(newPokemon){
     return async function(dispatch){
         await axios
-        .post(`${URL}/pokemons`)
+        .post(`${URL}/pokemons`, newPokemon)
         .then((response) =>{
+            console.log(response.data);
             return dispatch({
                 type: CREATE_POKEMON,
                 payload: response.data
             });
         })
-        .catch(error => console.log(error));
+        .catch(error => alert(error.response.data));
     };
 };
 

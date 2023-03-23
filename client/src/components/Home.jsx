@@ -8,10 +8,7 @@ import Pagination from './Pagination'
 import { 
 
     getPokemons,
-    getPokemonDetails,
-    getPokemonByName,
     getPokemonsTypes,
-    createPokemon,
     sortPokemonsByAttack,
     sortPokemonsByName,
     filterPokemonsByOrigin,
@@ -35,7 +32,7 @@ export default function Home(){ //¿props?
 
     //PAGINADO:
   const [currentPage, setCurrentPage]= useState(1) //Mi página actual que arraca en 1.
-  const [pokemonsPerPage, setPokemonsPerPage]= useState(12) // Mis pokemons por página que son 12.
+  const pokemonsPerPage = 12; // Mis pokemons por página que son 12.
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon= indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = Array.isArray(pokemons) ? pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) : [];  //Constante que guarda todos los pokemons que voy a tener por pagina.

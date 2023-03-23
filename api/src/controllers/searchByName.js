@@ -12,9 +12,11 @@ async function searchByName(name){
         const myPokemons = [...apiPokemons, ...dbPokemons];
 
         // Buscar los objetos en el arreglo myPokemons cuyo atributo Nombre incluya al valor de name que llega por query
-        const foundedPokemons = myPokemons.filter(pokemon => pokemon.Nombre.toLowerCase().includes(name.toLowerCase()));
+        // const foundedPokemons = myPokemons.filter(pokemon => pokemon.Nombre.toLowerCase().includes(name.toLowerCase()));
 
-        if(!foundedPokemons) throw new Error(`El pokemon ${name} no existe.`)
+        const foundedPokemons = myPokemons.filter(pokemon => pokemon.Nombre.toLowerCase() === name.toLowerCase());
+
+        if(!foundedPokemons[0]) throw new Error(`El pokemon ${name} no existe.`)
         return(foundedPokemons);
 
         

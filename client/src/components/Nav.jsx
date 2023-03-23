@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getPokemonByName } from '../actions/index';
 import styles from '../styles/nav.module.css';
 import { Link } from "react-router-dom";
+import searchingImg from '../resources/searching.gif'
 
 export default function Nav(){
 
     const dispatch = useDispatch();
 
-    const [name, setName] = useState('')
+    const [name, setName] = useState('');
 
-    const [searchedPokemon, setSearchedPokemon] = useState({})
-
+    const [loading, setLoading] = useState (false);
 
     function handleInput(event){
         event.preventDefault();
@@ -19,14 +19,17 @@ export default function Nav(){
     }
 
     function handleClick(){
+
         const pokemonName = name.trim().toLowerCase();
 
         if(!pokemonName){
             alert('No ingresó un nombre.');
         } else if(!pokemonName.match(/^[a-zA-Z]+$/)){
-            alert('Ingrese un nombre sin números.');
+            alert('Ingrese un nombre sin números ni caracteres especiales.');
         } else {
-            dispatch(getPokemonByName(pokemonName));
+            setLoading(true);
+            dispatch(getPokemonByName(pokemonName))
+            .finally(() => setLoading(false));
         }
         
 
@@ -41,6 +44,9 @@ export default function Nav(){
             <input type="text" placeholder='Ingrese un nombre...' onChange={handleInput}/>
             <button onClick={handleClick}>Buscar</button>
         </div>
-        
+        {loading 
+            ? (<img src={searchingImg} alt='Buscando...' className={styles.searchingImg}></img>)
+            : null
+        }
     </div>
 }

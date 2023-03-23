@@ -18,7 +18,7 @@ pokemonsRouter.get('/', async (req, res) => {
 
         res.json(allPokemons);
     } catch (error) {
-        res.send(error.message)
+        res.status(500).send(error.message)
     }
 });
 
@@ -33,7 +33,7 @@ pokemonsRouter.get('/name', async (req, res) => {
         res.json(foundedPokemon)
         
     } catch (error) {
-        res.send(error.message);
+        res.status(404).send(error.message);
     }
 });
 
@@ -47,7 +47,7 @@ pokemonsRouter.get('/:idPokemon', async (req, res) =>{
         res.json(foundedPokemon);
 
     } catch (error) {
-        res.send(error.message);
+        res.status(404).send(error.message);
     }
 });
 
@@ -62,7 +62,7 @@ pokemonsRouter.post('/', async (req, res) => {
         res.json(createdPokemon);
 
     } catch (error) {
-        res.send(error.message);
+        res.status(400).send(error.message);
     }
 });
 
