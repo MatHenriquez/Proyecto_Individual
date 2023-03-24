@@ -1,11 +1,17 @@
-.Card{
+.link{
+    text-decoration: none;
+}
+
+.card{
     border: 2px solid black;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     flex-wrap: wrap;
     background-color: rgba(255, 0, 0, 0.9);
     width: 150px;
+    height: 320px;
+    border-radius: 5%;
+    border: 3px solid #FFEA00;
 }
 
 .name{
@@ -17,6 +23,8 @@
     width: 90px;
     margin-left: 20%;
     background-color: #FFEA00;
+    border-style: dotted;
+    border-color: #FF7B00;
 }
 
 .types{

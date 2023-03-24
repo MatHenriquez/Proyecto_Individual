@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Landing from './components/Landing';
 import Nav from './components/Nav';
 import NotFound from './components/NotFound';
+import FoundedPokemon from './components/FoundedPokemon';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route exact path = '/home'><Home /></Route>
         <Route exact path = '/detail/:idPokemon'><Detail/></Route>
         <Route exact path = '/form'><Form /></Route>
+        <Route exact path = '/search'><FoundedPokemon /></Route>
         <Route path = '/*'><NotFound /></Route>
       </Switch>
     </div>

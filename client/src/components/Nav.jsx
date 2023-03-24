@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getPokemonByName } from '../actions/index';
 import styles from '../styles/nav.module.css';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import searchingImg from '../resources/searching.gif'
 
 export default function Nav(){
+
+    const history = useHistory();
 
     const dispatch = useDispatch();
 
@@ -18,7 +20,7 @@ export default function Nav(){
         setName(event.target.value);
     }
 
-    function handleClick(){
+    async function handleClick(){
 
         const pokemonName = name.trim().toLowerCase();
 
@@ -28,15 +30,16 @@ export default function Nav(){
             alert('Ingrese un nombre sin números ni caracteres especiales.');
         } else {
             setLoading(true);
-            dispatch(getPokemonByName(pokemonName))
-            .finally(() => setLoading(false));
+            await dispatch(getPokemonByName(pokemonName))
+            setLoading(false);
+            history.push(`/search`);
         }
         
-
+        
     }
     
     return <div className={styles.nav}>
-        <Link to='/home'>
+        <Link to={`/home`}>
          <button className={styles.btn}>INICIO</button>
         </Link>
 

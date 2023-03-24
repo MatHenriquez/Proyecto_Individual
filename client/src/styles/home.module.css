@@ -8,7 +8,11 @@
 .generalContainer{
     display: flex;
     justify-content: center;
+}
 
+.formContainer{
+    justify-content: end;
+    border: 5px solid yellow;
 }
 
 .orderPagination{

@@ -85,6 +85,7 @@ export default function Home(){ //¿props?
         <div>
         </div>
         ) : (
+          <div className={styles.formContainer}>
         <div className={styles.options}>
       <Link to='/form'>Crea tu propio pokemon.</Link>
 
@@ -117,6 +118,7 @@ export default function Home(){ //¿props?
                 </option>
                 ))}
         </select>
+        </div>
         </div>
         )}
       <div className={styles.orderPagination}>

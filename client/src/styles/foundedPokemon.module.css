@@ -1,0 +1,13 @@
+.back{
+    background-image: url('../resources/neonBack.jpg');
+    background-size: cover;
+    min-height: 91.5vh;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.warning{
+    color: #FF7B00;
+    font-size: 60px;
+}

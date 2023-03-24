@@ -44,7 +44,7 @@ const reducer = (state = initialState, action) => {
         case GET_POKEMONS_BY_NAME:
             return {
                 ...state,
-                filteredPokemons: action.payload
+                searchedPokemons: action.payload
             };
 
         case CREATE_POKEMON: {
