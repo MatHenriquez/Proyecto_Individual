@@ -87,33 +87,39 @@ export default function Home(){ //¿props?
         ) : (
           <div className={styles.formContainer}>
         <div className={styles.options}>
-      <Link to='/form'>Crea tu propio pokemon.</Link>
+      <Link to='/form' className={styles.linkToForm}>Crea tu propio pokemon.</Link>
 
      
-        <span>Ordenar alfabéticamente:</span>
-        <select onChange={(event) => handleSortNames(event)}>
-          <option value="ascendent">Ascendente</option>
-          <option value="descendent">Descendente</option>
+      <hr className={styles.hr} />
+
+        <span className={styles.optionTitle}>Ordenar por:</span>
+        <select className={styles.select} onChange={(event) => handleSortNames(event)}>
+          <option className={styles.option} disabled selected>Nombre</option>
+          <option className={styles.option} value="ascendent">Ascendente</option>
+          <option className={styles.option} value="descendent">Descendente</option>
         </select>
 
-        <span>Ordenar por Ataque:</span>
-        <select onChange={(event) => handleSortAttacks(event)}>
-          <option value="ascendent">Ascendente</option>
-          <option value="descendent">Descendente</option>
-        </select>
-        
-        <span>Filtrar por origen:</span>
-        <select onClick={(event) => handleOriginFilter(event)} >
-          <option value="all">Todos</option>
-          <option value="api">Pokemons de la serie</option>
-          <option value="db">Tus pokemons</option>
+        <select className={styles.select} onChange={(event) => handleSortAttacks(event)}>
+          <option className={styles.option} disabled selected>Ataque</option>
+          <option className={styles.option} value="ascendent">Ascendente</option>
+          <option className={styles.option} value="descendent">Descendente</option>
         </select>
 
-        <span>Filtrar por tipo:</span>
-        <select onChange={(event) => handleTypesFilter(event)}>
-          <option value ='all'>Todos los pokemons</option>
+        <hr className={styles.hr} />
+
+        <span className={styles.optionTitle}>Filtrar por :</span>
+        <select className={styles.select} onChange={(event) => handleOriginFilter(event)} >
+          <option className={styles.option} disabled selected>Origen</option>
+          <option className={styles.option} value="all">Todos los pokemons</option>
+          <option className={styles.option} value="api">Pokemons de la serie</option>
+          <option className={styles.option} value="db">Tus pokemons</option>
+        </select>
+
+        <select className={styles.select} onChange={(event) => handleTypesFilter(event)}>
+        <option className={styles.option} disabled selected>Tipo</option>
+          <option className={styles.option} value ='all'>Todos los tipos</option>
           {types?.map(type => (
-                <option key={type} value={type}>
+                <option className={styles.option} key={type} value={type}>
                   {type}
                 </option>
                 ))}

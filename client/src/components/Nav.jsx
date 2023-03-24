@@ -20,17 +20,16 @@ export default function Nav(){
         setName(event.target.value);
     }
 
+    
     async function handleClick(){
 
         const pokemonName = name.trim().toLowerCase();
 
         if(!pokemonName){
             alert('No ingresó un nombre.');
-        } else if(!pokemonName.match(/^[a-zA-Z]+$/)){
-            alert('Ingrese un nombre sin números ni caracteres especiales.');
         } else {
             setLoading(true);
-            await dispatch(getPokemonByName(pokemonName))
+            await dispatch(getPokemonByName(pokemonName)) //Dice que await no tiene efecto pero sí lo tiene.
             setLoading(false);
             history.push(`/search`);
         }

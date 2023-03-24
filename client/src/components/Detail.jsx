@@ -3,6 +3,7 @@ import { useDispatch , useSelector} from "react-redux";
 import { useParams} from "react-router-dom";
 import { getPokemonDetails } from '../actions/index';
 import loadingImg from '../resources/loading.gif';
+import styles from '../styles/detail.module.css';
 
 
 export default function Detail(){
@@ -24,24 +25,24 @@ export default function Detail(){
 
 
 
-      return (<div>{
+      return (<div className={styles.back}>{
         loading ? (
-          <div>
-          <h2>Loading...</h2>
-          <img src={loadingImg} alt='loadingImg' />
+          <div className={styles.loading}>
+            <h2 className={styles.loadingTitle}>Investigando pokemon...</h2>
+            <img src={loadingImg} alt='loadingImg' />
           </div>
         ) : (
-          <div>
+          <div className={styles.details}>
             {/* Coloco operador && porque pokemon tarda en buscarse y el código trata de acceder a sus propiedades antes de que cargue, causando un error. */}
-            {<h4>Nombre: {pokemon && pokemon.Nombre}</h4>} 
-            {pokemon && <img src={pokemon.Imagen} alt={pokemon.Nombre}></img>}
-            {<h5>Vida: {pokemon && pokemon.Vida}</h5>}
-            {<h5>Ataque: {pokemon && pokemon.Ataque}</h5>}
-            {<h5>Defensa: {pokemon && pokemon.Defensa}</h5>}
-            {<h5>Velocidad: {pokemon && pokemon.Velocidad}</h5>}
-            {<h5>Altura: {pokemon && pokemon.Altura}</h5>}
-            {<h5>Peso: {pokemon && pokemon.Peso}</h5>}
-            {<h5>Tipos: {pokemon && pokemon.Types.map(type => `*${type} `)}</h5>}
+            {<h4 className={styles.name}>Nombre: <br /> {pokemon && <span className={styles.value}>{pokemon.Nombre}</span> }</h4>} 
+            {pokemon && <img className={styles.img} src={pokemon.Imagen} alt={pokemon.Nombre}></img>}
+            {<h5 className={styles.data}>Vida: {pokemon && <span className={styles.value}>{pokemon.Vida}</span>}</h5>}
+            {<h5 className={styles.data}>Ataque: {pokemon && <span className={styles.value}>{pokemon.Ataque}</span> }</h5>}
+            {<h5 className={styles.data}>Defensa: {pokemon && <span className={styles.value}>{pokemon.Defensa}</span> }</h5>}
+            {<h5 className={styles.data}>Velocidad: {pokemon && <span className={styles.value}>{pokemon.Velocidad}</span> }</h5>}
+            {<h5 className={styles.data}>Altura: {pokemon && <span className={styles.value}>{pokemon.Altura}</span> }</h5>}
+            {<h5 className={styles.data}>Peso: {pokemon && <span className={styles.value}>{pokemon.Peso}</span> }</h5>}
+            {<h5 className={styles.data}>Tipos: {pokemon && pokemon.Types.map(type => <span className={styles.value}><br />-{type}<br /></span>)}</h5>}
           </div>
         )
       }

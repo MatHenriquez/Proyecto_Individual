@@ -8,11 +8,20 @@
 .generalContainer{
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin-left: 250px;
 }
 
 .formContainer{
     justify-content: end;
-    border: 5px solid yellow;
+    position: absolute;
+    width: 250px;
+    height: 500px;
+    top: 0;
+    left: 0;
+    right: 1;
+    bottom: 1;
+    margin: 270px auto auto auto;
 }
 
 .orderPagination{
@@ -24,7 +33,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    column-gap: 150px;
+    column-gap: 130px;
     row-gap: 10px;
 }
 
@@ -41,6 +50,14 @@
     font-size: 40px;
     box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
     border-radius: 15%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 1;
+    margin: 250px auto auto auto;
+    width: 500px;
+    height: fit-content;
 }
 
 .loadingTitle{
@@ -53,7 +70,45 @@
 }
 
 .options{
+    background-color: rgba(255, 255, 0, 0.95);
     display: flex;
     flex-direction: column;
+    height: 600px;
+    justify-content: space-around;
+    align-items: center;
 }
 
+.linkToForm{
+    border: 3px solid #FF7B00;
+    font-weight: bold;
+    color: rgb(255, 255, 0);
+    text-decoration: none;
+    border-radius: 10%;
+    padding: 10px;
+    background-color: red;
+}
+
+.optionTitle{
+    color: #FF7B00;
+    font-weight: bold;
+}
+
+.select {
+    color: #FF7B00;
+    background-color: rgba(255, 255, 0, 0.85);
+    height: 29px;
+    overflow: hidden;
+    width: 200px;
+    font-weight: bold;
+    border-color: red;
+ }
+
+ .select:hover{
+    color: rgb(255, 255, 0);
+    background-color: #FF7B00;
+ }
+
+.hr{
+    border-color: red;
+    width: 150px;
+}

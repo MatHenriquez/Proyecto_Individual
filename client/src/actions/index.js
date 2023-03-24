@@ -57,7 +57,6 @@ export function getPokemonByName(name){
         await axios
         .get(`${URL}/pokemons/name?name=${name}`)
         .then((response) =>{
-            console.log(response.data)
             return dispatch({
                 type: GET_POKEMONS_BY_NAME,
                 payload: response.data
