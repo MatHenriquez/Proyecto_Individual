@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPokemon, getPokemonsTypes } from '../actions/index';
+import styles from '../styles/form.module.css'
 
 
 function validate(inputs){
@@ -11,40 +12,40 @@ function validate(inputs){
     let errors = {};
 
     if(!inputs.Nombre){
-        errors.Nombre = 'Ingrese un nombre.'
+        errors.Nombre = '*Ingrese un nombre.'
     }  else if (!stringRegExp.test(inputs.Nombre)) {
-        errors.Nombre = 'Nombre inválido.';
+        errors.Nombre = '*Nombre inválido.';
     }
 
     if(!inputs.Imagen){
-        errors.Imagen = 'Ingrese una URL para la imagen.';
+        errors.Imagen = '*Ingrese una URL para la imagen.';
         } else if (!urlRegExp.test(inputs.Imagen)){
-        errors.Imagen = 'URL inválida.';
+        errors.Imagen = '*URL inválida.';
       }
   
   
       if(!inputs.Vida){
-        errors.Vida = 'Ingrese una vida.';
+        errors.Vida = '*Ingrese una vida.';
         } else if (!numberRegExp.test(inputs.Vida)){
-        errors.Vida = 'Vida inválida.';
+        errors.Vida = '*Vida inválida.';
       }
 
       if(!inputs.Ataque){
-        errors.Ataque = 'Ingrese un valor de ataque.';
+        errors.Ataque = '*Ingrese un valor de ataque.';
         } else if (!numberRegExp.test(inputs.Ataque)){
-        errors.Ataque = 'Ataque inválida.';
+        errors.Ataque = '*Ataque inválido.';
       }
 
       if(!inputs.Defensa){
-        errors.Defensa = 'Ingrese un valor de defensa.';
+        errors.Defensa = '*Ingrese un valor de defensa.';
         } else if (!numberRegExp.test(inputs.Defensa)){
-        errors.Defensa = 'Defensa inválida.';
+        errors.Defensa = '*Defensa inválida.';
       }
   
   
   
       if(inputs.tipos.length === 0){
-        errors.tipos = 'Seleccione algún tipo';
+        errors.tipos = '*Seleccione algún tipo';
       }
   
       return errors;
@@ -54,7 +55,7 @@ export default function Form(){
 
     const dispatch = useDispatch();
 
-    const[inputs, setInputs] = useState({
+    const initialInputs = {
       Nombre: '',
       Imagen: '',
       Vida: 0,
@@ -64,161 +65,166 @@ export default function Form(){
       Altura: '',
       Peso: '',
       tipos: [],
-    })
+    }
+
+    const[inputs, setInputs] = useState(initialInputs)
 
     const [disabler, setDisabler] = useState(true)
 
     const [errors, setErrors] = useState({});
 
-    const types = useSelector(state => state.pokemonTypes)
+    const types = useSelector(state => state.pokemonTypes);
 
-    // function handleInputChange(event){
-
-    //     setInputs({
-    //         ...inputs,
-    //         [event.target.name]: event.target.value
-    //     })
-    //     setErrors(validate({
-    //         ...inputs,
-    //         [event.target.name]: event.target.value
-    //     }))
-        
-    // }
 
     function handleInputChange(event) {
-
-        let newValue;
-      
-        if (event.target.type === 'checkbox') {
+      let newValue;
+  
+      if (event.target.type === 'checkbox') {
           if (event.target.checked) {
-            newValue = inputs.tipos.concat(event.target.value);
+              newValue = inputs.tipos.concat(event.target.value);
           } else {
-            newValue = inputs.tipos.filter(tipo => tipo !== event.target.value);
+              newValue = inputs.tipos.filter(tipo => tipo !== event.target.value);
           }
-        } else {
+      } else {
           newValue = event.target.value;
-        }
-      
-        setInputs({
-          ...inputs,
-          [event.target.name]: newValue
-        });
-      
-        setErrors(validate({
-          ...inputs,
-          [event.target.name]: newValue
-        }));
       }
+  
+      const newInputs = {
+          ...inputs,
+          [event.target.name]: newValue
+      };
+  
+      //Hago todo esto porque el disabler estaba usando el estado anterior de errors.
+      setInputs(newInputs);
+  
+      const newErrors = validate(newInputs);
+      setErrors(newErrors);
+  
+      const hasErrors = Object.keys(newErrors).length > 0;
+      setDisabler(hasErrors);
+  }
+  
 
     useEffect(() => {
 
         dispatch(getPokemonsTypes());
 
-        // Verificar si hay errores en el formulario
-        const hasErrors = Object.keys(errors).length > 0;
-    
-        // Actualizar el estado de "disabler"
-        setDisabler(hasErrors);
-      }, [errors]);
+       
+      }, [dispatch]);
 
     function handleSubmit(event){
         event.preventDefault();
         if(Object.keys(errors).length > 0){
             alert('El formulario no se llenó correctamente.');
         } else {
-            console.log(inputs);
             dispatch(createPokemon(inputs));
+            alert('Pokemon creado con éxito');
         }
     }
 
 
-    return <div>
-        <form onSubmit={handleSubmit}>
+    return <div className={styles.back}>
+      <h2 className={styles.title}>Crea tu propio pokemon:</h2>
+        <form className={styles.form} onSubmit={handleSubmit}>
 
-            <label >*Nombre: </label>
-            <input 
+            <div className={styles.field}>
+            <label  className={styles.labels}>*Nombre: </label>
+            <input className={styles.inputs}
                 type="text" 
                 name="Nombre"
                 value={inputs.Nombre}
                 placeholder="Nombre del nuevo pokemon..."
                 onChange={handleInputChange}/>
-                {errors.Nombre && <span>{errors.Nombre}</span>}
-                <br />
+            </div>
+                {errors.Nombre && <span className={styles.error}>{errors.Nombre}</span>}
 
-            <label>*Imagen: </label>
-            <input 
+
+            <div className={styles.field}>
+            <label className={styles.labels}>*Imagen: </label>
+            <input className={styles.inputs}
                 type="text" 
                 name="Imagen"
                 value={inputs.Imagen}
                 placeholder="URL de la imagen del nuevo pokemon..."
                 onChange={handleInputChange}/>
-                {errors.Imagen && <span>{errors.Imagen}</span>}
-                <br />
+            </div>
+                {errors.Imagen && <span className={styles.error}>{errors.Imagen}</span>}
 
-            <label>Altura: </label>
-            <input 
+
+            <div className={styles.field}>
+            <label className={styles.labels}>Altura: </label>
+            <input className={styles.inputs}
                 type="number" 
                 name="Altura"
                 value={inputs.Altura}
                 placeholder="Altura del nuevo pokemon..."
                 onChange={handleInputChange}/>
-                {errors.Altura && <span>{errors.Altura}</span>}
-                <br />
+                </div>
+                {errors.Altura && <span className={styles.error}>{errors.Altura}</span>}
 
-            <label>Peso: </label>
-            <input 
+
+            <div className={styles.field}>
+            <label className={styles.labels}>Peso: </label>
+            <input className={styles.inputs}
                 type="number" 
                 name="Peso"
                 value={inputs.Peso}
                 placeholder="Peso del nuevo pokemon..."
                 onChange={handleInputChange}/>
-                {errors.Peso && <span>{errors.Peso}</span>}
-                <br />
+                </div>
+                {errors.Peso && <span className={styles.error}>{errors.Peso}</span>}
 
-            <label>*Vida: </label>
-            <input 
+            <div className={styles.field}>
+            <label className={styles.labels}>*Vida: </label>
+            <input className={styles.inputs}
                 type="number" 
                 name="Vida"
                 value={inputs.Vida}
                 placeholder="Vida del nuevo pokemon..."
                 onChange={handleInputChange}/>
-                {errors.Vida && <span>{errors.Vida}</span>}
-                <br />
+                </div>
+                {errors.Vida && <span className={styles.error}>{errors.Vida}</span>}
 
-            <label>*Ataque: </label>
-            <input 
+            <div className={styles.field}>
+            <label className={styles.labels}>*Ataque: </label>
+            <input className={styles.inputs}
                 type="number" 
                 name="Ataque"
                 value={inputs.Ataque}
                 placeholder="Ataque del nuevo pokemon..."
                 onChange={handleInputChange}/>
-                {errors.Ataque && <span>{errors.Ataque}</span>}
-                <br />
+                </div>
+                {errors.Ataque && <span className={styles.error}>{errors.Ataque}</span>}
 
-            <label>*Defensa: </label>
-            <input 
+            <div className={styles.field}>
+            <label className={styles.labels}>*Defensa: </label>
+            <input className={styles.inputs}
                 type="number" 
                 name="Defensa"
                 value={inputs.Defensa}
                 placeholder="Defensa del nuevo pokemon..."
                 onChange={handleInputChange}/>
-                {errors.Defensa && <span>{errors.Defensa}</span>}
-                <br />
+                </div>
+                {errors.Defensa && <span className={styles.error}>{errors.Defensa}</span>}
 
-            <label>Velocidad: </label>
-            <input 
+            <div className={styles.field}>
+            <label className={styles.labels}>Velocidad: </label>
+            <input className={styles.inputs}
                 type="number" 
                 name="Velocidad"
                 value={inputs.Velocidad}
                 placeholder="Velocidad del nuevo pokemon..."
                 onChange={handleInputChange}/>
-                {errors.Velocidad && <span>{errors.Velocidad}</span>}
-                <br />
+                </div>
+                {errors.Velocidad && <span className={styles.error}>{errors.Velocidad}</span>}
 
-            <label>*Tipo/s: </label>
 
+          <label className={styles.labels}>*Tipo/s: </label>
+        <div className={styles.field}>
+
+          <div className={styles.types}>
             {types.map((type) => (
-                <label key={type} >
+                <label key={type} className={styles.type} >
                 <input
                 type="checkbox"
                 name="tipos"
@@ -229,14 +235,14 @@ export default function Form(){
                 {type}
                 </label>
             ))}
+            </div>
 
-                <br />
-                {errors.tipos && <span>{errors.tipos}</span>}
-                <br />
+</div>
+                {errors.tipos && <span className={styles.error}>{errors.tipos}</span>}
 
             <input type="submit" value='Crear' disabled={disabler}/>
-            <br />
-            <label>Los campos marcados con un * son obligatorios.</label>
+            
+            <label className={styles.message}>Los campos marcados con un * son obligatorios.</label>
         </form>
     </div>
 }

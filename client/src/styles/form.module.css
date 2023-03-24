@@ -1,0 +1,85 @@
+.back{
+    background-image: url('../resources/neonBack.jpg');
+    background-size: cover;
+    min-height: 91.5vh;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.title {
+    color: #FF7B00;
+    font-size: 60px;
+    box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
+    background-color: rgba(255, 255, 0, 1);
+    padding: 10px;
+}
+
+.form{
+    background-color: red;
+    color: #FF7B00;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 600px;
+    padding: 10px;
+}
+
+.types{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2px;
+}
+
+.field{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 10px;
+    padding: 0px;
+}
+
+.labels{
+    background-color: rgba(255, 255, 0, 1);
+    font-weight: bold;
+    padding: 2px;
+    margin: 3px;
+    width: 80px;
+}
+
+.type{
+    background-color: rgba(255, 255, 0, 1);
+    font-weight: bold;
+    padding: 2px;
+    margin: 3px;
+    width: 100px;
+}
+
+.message{
+
+        background-color: rgba(255, 255, 0, 1);
+        font-weight: bold;
+        padding: 2px;
+        margin: 3px;
+}
+
+.error{
+    color: yellow;
+    font-weight: bold;
+}
+
+.inputs{
+    background-color: #FF7B00;
+    color: yellow;
+    font-weight: bold;
+    width: 200px;
+}
+
+.inputs::placeholder { 
+    color: yellow;
+    font-weight: lighter;
+}
