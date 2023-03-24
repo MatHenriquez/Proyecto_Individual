@@ -76,12 +76,19 @@ export default function Home(){ //¿props?
        }
 
       
-    return <div>
-        <h1>Pokedex:</h1>
+    return <div className={styles.back}>
+        <h1 className={styles.title}>Pokedex:</h1>
+
+       <div className={styles.generalContainer}>
+
+       {loading ? (
         <div>
+        </div>
+        ) : (
+        <div className={styles.options}>
       <Link to='/form'>Crea tu propio pokemon.</Link>
 
-      <div>
+     
         <span>Ordenar alfabéticamente:</span>
         <select onChange={(event) => handleSortNames(event)}>
           <option value="ascendent">Ascendente</option>
@@ -111,18 +118,25 @@ export default function Home(){ //¿props?
                 ))}
         </select>
         </div>
-        </div>
-        
-        <Pagination  
-          pokemonsPerPage={pokemonsPerPage}
-          pokemons={pokemons}
-          pagination={pagination}
-          currentPage={currentPage}
-        />    
-       
-    {loading ? (
+        )}
+      <div className={styles.orderPagination}>
+
+      {loading ? (
         <div>
-        <h2>Loading...</h2>
+        </div>
+        ) : (
+          <Pagination
+            pokemonsPerPage={pokemonsPerPage}
+            pokemons={pokemons}
+            pagination={pagination}
+            currentPage={currentPage}
+          />    
+     )}
+
+    {loading ? (
+       
+        <div className={styles.loading}>
+        <h2 className={styles.loadingTitle}>Capturando pokemons...</h2>
         <img src={loadingImg} alt='loadingImg' />
         </div>
       ) : (
@@ -141,7 +155,8 @@ export default function Home(){ //¿props?
           ))}
         </div>
       )}
-    
+      </div>
+      </div>
    
       
     </div>

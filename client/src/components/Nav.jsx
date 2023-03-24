@@ -37,12 +37,12 @@ export default function Nav(){
     
     return <div className={styles.nav}>
         <Link to='/home'>
-         <button className={styles.btn}>HOME</button>
+         <button className={styles.btn}>INICIO</button>
         </Link>
 
-        <div>
-            <input type="text" placeholder='Ingrese un nombre...' onChange={handleInput}/>
-            <button onClick={handleClick}>Buscar</button>
+        <div className={styles.search}>
+            <input type="text" placeholder='Ingrese un nombre...' onChange={handleInput} className={styles.searchName}/>
+            <button onClick={handleClick} className={styles.searchBtn}>Buscar</button>
         </div>
         {loading 
             ? (<img src={searchingImg} alt='Buscando...' className={styles.searchingImg}></img>)

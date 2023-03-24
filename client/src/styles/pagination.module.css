@@ -4,6 +4,16 @@
     list-style:none;
     justify-content: center;  
     justify-content: space-around;
+    color: #FF7B00;
+    font-weight: bold;
+    font-size: large;
+    background-color: rgba(255, 255, 0, 0.2);
+    position: absolute;
+    top: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto auto 5px auto;
 }
 
 .li:hover{

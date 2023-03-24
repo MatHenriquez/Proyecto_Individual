@@ -10,12 +10,12 @@ export default function Card({id, name, image, types}){
 
        
                 <div className={styles.Card}>
-                    <h3>{name}</h3>
-                    <img src={image} alt={name}/>
+                    <h3 className={styles.name}>{name}</h3>
+                    <img src={image} alt={name} className={styles.img}/>
                     <div>
-                        <h4>Tipos:</h4>
+                        <h4 className={styles.types} >Tipos:</h4>
                         {
-                            types.map((type, index) => <h4 key={index}>{type}</h4>)
+                            types.map((type, index) => <h4 className={styles.types} key={index}>{type}</h4>)
                         }
                     </div>
 

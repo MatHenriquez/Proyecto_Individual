@@ -4,5 +4,21 @@
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: pink;
+    background-color: rgba(255, 0, 0, 0.9);
+    width: 150px;
+}
+
+.name{
+    color: #FFEA00;
+    box-shadow: 0px 0px 50px #FFEA00;
+}
+
+.img{
+    width: 90px;
+    margin-left: 20%;
+    background-color: #FFEA00;
+}
+
+.types{
+    color: #FFEA00;
 }

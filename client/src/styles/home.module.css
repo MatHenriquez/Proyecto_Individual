@@ -1,9 +1,55 @@
+.back{
+    background-image: url('../resources/neonBack.jpg');
+    background-size: cover;
+    min-height: 91.5vh;
+    padding-top: 20px;
+}
+
+.generalContainer{
+    display: flex;
+    justify-content: center;
+
+}
+
+.orderPagination{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 .CardsContainer{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    
+    column-gap: 150px;
+    row-gap: 10px;
 }
 
+.title {
+    color: #FF7B00;
+    font-size: 60px;
+    box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
+}
 
+.loading{
+    padding: 2%;
+    color: #FF7B00;
+    background-color: #FF7B00;
+    font-size: 40px;
+    box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
+    border-radius: 15%;
+}
+
+.loadingTitle{
+    padding: 2%;
+    color: #FF7B00;
+    font-size: 40px;
+    box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
+    background-color: rgba(255, 255, 0, 0.85);
+    border-radius: 40%;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+}
 

@@ -6,7 +6,7 @@ export default function Landing(){
     return <div className={styles.background}>
         <h1 className={styles.title}>¡Bienvenidos a la Aventura!</h1>
         <Link to='/home'>
-         <button className={styles.btn}>HOME</button>
+         <button className={styles.btn}>INICIO</button>
         </Link>
         
     </div>
