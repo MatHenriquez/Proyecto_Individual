@@ -76,6 +76,7 @@ export default function Home(){
         setCurrentPage(pageNumber);
        }
 
+       console.log(currentPage);
       
     return <div className={styles.back}>
         <h1 className={styles.title}>Pokedex:</h1>

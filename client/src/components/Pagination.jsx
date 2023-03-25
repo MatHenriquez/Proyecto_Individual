@@ -41,7 +41,7 @@ function Pagination ({pokemonsPerPage, pokemons, pagination, currentPage}){ // d
             </span>
           </li>
           <li className={styles.li}>
-            <span onClick={() => pagination(pokemons.length/pokemonsPerPage)}>{'>|'}</span>
+            <span onClick={() => pagination(Math.ceil(pokemons.length/pokemonsPerPage))}>{'>|'}</span>
           </li>
         </ul>
     </nav>
