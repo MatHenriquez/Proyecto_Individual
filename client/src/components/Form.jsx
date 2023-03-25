@@ -44,8 +44,8 @@ function validate(inputs){
   
   
   
-      if(inputs.tipos.length === 0){
-        errors.tipos = '*Seleccione algún tipo';
+      if(inputs.tipos.length <= 0 || inputs.tipos.length > 2){
+        errors.tipos = '*Seleccione uno o dos tipos';
       }
   
       return errors;
@@ -240,7 +240,7 @@ export default function Form(){
 </div>
                 {errors.tipos && <span className={styles.error}>{errors.tipos}</span>}
 
-            <input type="submit" value='Crear' disabled={disabler}/>
+            <input className={styles.createBtn} type="submit" value='Crear' disabled={disabler}/>
             
             <label className={styles.message}>Los campos marcados con un * son obligatorios.</label>
         </form>

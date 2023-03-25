@@ -13,9 +13,13 @@ import {
 const initialState = {
     loadedPokemons: [], //Todos los pokemons.
     filteredPokemons: [], //Pokemons reenderizados en home
-    originPokemons: [], //Pokemons filtrados por origen
     pokemonTypes: [], //Todos los tipos de pokemon.
-    searchedPokemons: [] //Pokemon buscado por nombre o id.
+    searchedPokemons: [], //Pokemon buscado por nombre o id.
+
+    currentPage: 1,
+
+    isFilterByPersonalization: false,
+    isFilterByType: 'all',
   };
 
 const reducer = (state = initialState, action) => {
@@ -26,32 +30,31 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loadedPokemons: action.payload,
                 filteredPokemons: action.payload,
-                originPokemons: action.payload,
             };
 
         case GET_POKEMON_DETAILS:
             return {
                 ...state,
-                searchedPokemons: action.payload
+                searchedPokemons: action.payload,
             };
 
         case GET_POKEMONS_TYPES:
             return {
                 ...state,
-                pokemonTypes: action.payload
+                pokemonTypes: action.payload,
             };
 
         case GET_POKEMONS_BY_NAME:
             return {
                 ...state,
-                searchedPokemons: action.payload
+                searchedPokemons: action.payload,
             };
 
         case CREATE_POKEMON: {
             return {
                 ...state,
                 loadedPokemons: [...state.loadedPokemons, action.payload],
-                filteredPokemons: [...state.loadedPokemons, action.payload]
+                filteredPokemons: [...state.loadedPokemons, action.payload],
             };
         }
 
@@ -68,7 +71,6 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loadedPokemons: sortedPokemonsByAttack,
                 filteredPokemons: sortedAndFilteredByAttack,
-
             };
 
         case ORDER_POKEMONS_BY_NAME:
@@ -83,53 +85,61 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loadedPokemons: sortedPokemonsByName,
-                filteredPokemons: sortedAndFilteredByName
+                filteredPokemons: sortedAndFilteredByName,
             };
 
    
 
         case FILTER_POKEMONS_BY_ORIGIN:
-            if(action.payload === 'all'){
-                return {
-                    ...state,
-                    filteredPokemons: state.loadedPokemons,
-                };
-            } else if (action.payload === 'api'){
-
-                const apiPokemons = [...state.loadedPokemons].filter(
-                    (pokemon) => typeof pokemon.ID === 'number'
-            )
-                return {
-                    ...state,
-                    filteredPokemons: apiPokemons,
-                };
-
-            } else {
-
-                const dbPokemons = [...state.loadedPokemons].filter(
-                    (pokemon) => typeof pokemon.ID !== 'number'
-                )
-                return {
-                    ...state,
-                    filteredPokemons: dbPokemons,
-                };
+            let filteredPokemonsByOrigin = [...state.loadedPokemons];
+            let filtersAppliedByOrigin = [];
+            
+            if (action.payload === 'all') {
+                filteredPokemonsByOrigin = state.loadedPokemons;
+            } else if (action.payload === 'api') {
+                filteredPokemonsByOrigin = filteredPokemonsByOrigin.filter((pokemon) => typeof pokemon.ID === 'number');
+                filtersAppliedByOrigin.push('api');
+            } else if (action.payload === 'db') {
+                filteredPokemonsByOrigin = filteredPokemonsByOrigin.filter((pokemon) => typeof pokemon.ID === 'string');
+                filtersAppliedByOrigin.push('db');
             }
+            
+            // copia las variables de estado que no cambian
+            const newStateByOrigin = {
+                ...state,
+                filteredPokemons: filteredPokemonsByOrigin,
+                filtersApplied: filtersAppliedByOrigin,
+                pokemonTypes: state.pokemonTypes,
+                searchedPokemons: state.searchedPokemons,
+            };
+            
+            return newStateByOrigin;
+              
 
-            case FILTER_POKEMONS_BY_TYPE:
+        case FILTER_POKEMONS_BY_TYPE:
+                let filteredPokemonsByType = [...state.filteredPokemons]; // Cambiamos de originPokemons a filteredPokemons.
+                let filtersAppliedByType = [...state.filtersApplied];
 
-                if(action.payload === 'all'){
-                    return {
-                        ...state,
-                        filteredPokemons: state.loadedPokemons
-                    }
-                }
-                const typePokemons = [...state.loadedPokemons].filter((pokemon) =>
+                if (action.payload === 'all') {
+                    filteredPokemonsByType = [...state.originPokemons]; // volvemos a cargar todos los pokemons
+                    filtersAppliedByType = filtersAppliedByType.filter((filter) => filter !== 'type'); // eliminamos el filtro de tipo
+                } else {
+                    filteredPokemonsByType = filteredPokemonsByType.filter((pokemon) =>
                         pokemon.Types.some((type) => type === action.payload)
                     );
-                return{
-                    ...state,
-                    filteredPokemons: typePokemons,
+                    if (!filtersAppliedByType.includes('type')) {
+                        filtersAppliedByType.push('type');
+                    }
                 }
+
+                const newStateByType = {
+                    ...state,
+                    filteredPokemons: filteredPokemonsByType,
+                    filtersApplied: filtersAppliedByType,
+                };
+
+                return newStateByType;
+
         
         default:
             return state;

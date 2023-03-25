@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch , useSelector} from "react-redux";
 import loadingImg from '../resources/loading.gif';
 import styles from '../styles/home.module.css';
-import Pagination from './Pagination'
-
+import Pagination from './Pagination';
 
 import { 
 
@@ -19,8 +18,7 @@ import {
 import Card from './Card';
 import { Link } from "react-router-dom";
 
-
-export default function Home(){ //¿props?
+export default function Home(){ 
 
     const dispatch = useDispatch();
     
@@ -37,8 +35,7 @@ export default function Home(){ //¿props?
   const indexOfFirstPokemon= indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = Array.isArray(pokemons) ? pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) : [];  //Constante que guarda todos los pokemons que voy a tener por pagina.
 
-  
-
+   
     useEffect(() => {
 
       setLoading(true);
@@ -52,21 +49,25 @@ export default function Home(){ //¿props?
 
       function handleTypesFilter(event) {
         event.preventDefault();
+        setCurrentPage(1);
         dispatch(filterPokemonsByType(event.target.value));
       }
 
       function handleOriginFilter(event) {
         event.preventDefault();
+        setCurrentPage(1);
         dispatch(filterPokemonsByOrigin(event.target.value));
       }
 
       function handleSortNames(event) {
         event.preventDefault();
+        setCurrentPage(1);
         dispatch(sortPokemonsByName(event.target.value));
       }
 
       function handleSortAttacks(event) {
         event.preventDefault();
+        setCurrentPage(1);
         dispatch(sortPokemonsByAttack(event.target.value));
       }
 

@@ -1,7 +1,8 @@
 .background {
     background-image: url('../resources/notFoundBG.jpg');
     background-size: cover;
-    min-height: 94.2vh;
+    min-height: 93.4vh;
+    padding: 1px;
 }
 
 .btn {

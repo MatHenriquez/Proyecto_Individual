@@ -83,3 +83,27 @@
     color: yellow;
     font-weight: lighter;
 }
+
+.createBtn {
+    background-color: #FFEA00;
+    color: #FF7B00;
+    border: 2px solid #FF7B00;
+    font-weight: bold;
+    font-size: larger;
+    padding: 5px;
+    border-radius: 15%;
+    box-shadow: 0px 0px 25px rgba(255, 255, 0, 1);
+}
+
+.createBtn:hover:enabled{
+    background-color: #FF7B00;
+    color: #FFEA00;
+    cursor: pointer;
+    border: 2px solid #FFEA00;
+}
+
+
+input:disabled {
+    background-color: #FF7B00;
+    color: red;
+  }
