@@ -62,8 +62,6 @@ export default function Form(){
 
     const pokemons = useSelector(state => state.allPokemons);
 
-    
-
     const dispatch = useDispatch();
 
     const initialInputs = {
@@ -129,7 +127,6 @@ export default function Form(){
             alert('El formulario no se llenó correctamente.');
         } else {
             dispatch(createPokemon(inputs));
-            alert('Pokemon creado con éxito');
         }
     }
 

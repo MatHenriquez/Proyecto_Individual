@@ -1,19 +1,17 @@
 const { Pokemon, Type } = require('../db');
 const getApiTypes = require('../utils/saveApiTypes');
-
+const searchOnePokemon = require('../utils/searchOnePokemon');
 
 async function createPokemon(Nombre, Imagen, Vida, Ataque, Defensa, Velocidad, Altura, Peso, tipos){
-
-
 
     if(!Nombre || !Imagen || !Vida || !Ataque || !Defensa || tipos.length === 0)  {
       throw new Error ('Datos faltantes.');
     } else {
-      const pokemonExists = await Pokemon.findOne({ where: { Nombre: Nombre } });
+      const pokemonExists = await searchOnePokemon(Nombre);
 
-      if (pokemonExists) {
-        // Si el nombre de ese Pokemon ya existe, lanzamos un error.
-        throw new Error('Ya existe un Pokemon con este nombre');
+      if (pokemonExists[0]) {
+        // Si el nombre de ese Pokemon ya existe en la DB, lanzamos un error.
+        throw new Error(`El pokemon ${Nombre} ya existe`);
       }
     }
     // Crea el pokemon

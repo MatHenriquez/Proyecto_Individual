@@ -61,6 +61,7 @@ const reducer = (state = initialState, action) => {
         case CREATE_POKEMON: {
             return {
                 ...state,
+                allPokemons: [...state.allPokemons, action.payload], 
             };
         }
 
