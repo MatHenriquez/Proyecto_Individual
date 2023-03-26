@@ -5,9 +5,17 @@ const getApiTypes = require('../utils/saveApiTypes');
 async function createPokemon(Nombre, Imagen, Vida, Ataque, Defensa, Velocidad, Altura, Peso, tipos){
 
 
+
     if(!Nombre || !Imagen || !Vida || !Ataque || !Defensa || tipos.length === 0)  {
       throw new Error ('Datos faltantes.');
-    } 
+    } else {
+      const pokemonExists = await Pokemon.findOne({ where: { Nombre: Nombre } });
+
+      if (pokemonExists) {
+        // Si el nombre de ese Pokemon ya existe, lanzamos un error.
+        throw new Error('Ya existe un Pokemon con este nombre');
+      }
+    }
     // Crea el pokemon
     const pokemon = await Pokemon.create({
       Nombre,

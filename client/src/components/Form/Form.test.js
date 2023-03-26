@@ -30,9 +30,6 @@ describe("Form Tests:", () => {
             tipos: ['shadow']
     }
 
-    const errors = {
-    }
-
     const pokemons1 = [{
         Nombre: 'pikachu',
     }]
