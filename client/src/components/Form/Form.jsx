@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPokemon, getPokemonsTypes } from '../actions/index';
-import styles from '../styles/form.module.css'
+import { createPokemon, getPokemonsTypes } from '../../actions/index';
+import styles from '../../styles/form.module.css'
 
 
-function validate(inputs, pokemons){
+export function validate(inputs, pokemons){
     const stringRegExp = /^[a-zA-Z]{1,20}$/;
     const numberRegExp = /^([1-9][0-9]{0,2}|1000)$/;
     const urlRegExp = /^(?=.{1,255}$)(http|https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/; //Me fijo que no tenga más de 255 caracteres, ya que el modelo pokemon usa datatype varchar en la url.
 
 
+    const pokemonAlreadyExists = pokemons.some(pokemon => pokemon.Nombre.toLowerCase() === inputs.Nombre.toLowerCase())
     
-    const foundedSomePokemon = pokemons.map(pokemon => pokemon.Nombre.toLowerCase() === inputs.Nombre.toLowerCase() ?  true :  false);
 
     let errors = {};
 
@@ -19,7 +19,7 @@ function validate(inputs, pokemons){
         errors.Nombre = '*Ingrese un nombre.'
     }  else if (!stringRegExp.test(inputs.Nombre)) {
         errors.Nombre = '*Nombre inválido.';
-    } else if(foundedSomePokemon){
+    } else if(pokemonAlreadyExists){
         errors.Nombre = `El pokemon ${inputs.Nombre} ya existe.`;
     }
     
@@ -61,6 +61,10 @@ function validate(inputs, pokemons){
 export default function Form(){
 
     const pokemons = useSelector(state => state.allPokemons);
+
+    if(!pokemons.length > 0){
+        alert('No se han cargado los pokemons.') //Esto ocurre cuando el user ingresa directamente a la url /form o los pokemons no se han cargado.
+    }
 
     const dispatch = useDispatch();
 

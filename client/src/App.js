@@ -3,7 +3,7 @@ import './App.css';
 //Imports hechos por mí.
 import {  Switch, Route, useLocation } from "react-router-dom";
 import Detail from './components/Detail';
-import Form from './components/Form';
+import Form from './components/Form/Form';
 import Home from './components/Home';
 import Landing from './components/Landing';
 import Nav from './components/Nav';
