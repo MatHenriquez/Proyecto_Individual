@@ -72,6 +72,13 @@
     font-weight: bold;
 }
 
+.errorH1{
+    color: yellow;
+    font-weight: bold;
+    background-color: red;
+    font-size: 60px;
+}
+
 .inputs{
     background-color: #FF7B00;
     color: yellow;

@@ -62,9 +62,7 @@ export default function Form(){
 
     const pokemons = useSelector(state => state.allPokemons);
 
-    if(!pokemons.length > 0){
-        alert('No se han cargado los pokemons.') //Esto ocurre cuando el user ingresa directamente a la url /form o los pokemons no se han cargado.
-    }
+    
 
     const dispatch = useDispatch();
 
@@ -135,6 +133,10 @@ export default function Form(){
         }
     }
 
+    if(!pokemons.length > 0){
+        return <div className={styles.back}>
+            <h1 className={styles.errorH1}>Ingrese al formulario desde la página de Inicio.</h1></div>//Esto ocurre cuando el user ingresa directamente a la url /form o los pokemons no se han cargado.
+    }
 
     return <div className={styles.back}>
       <h2 className={styles.title}>Crea tu propio pokemon:</h2>
