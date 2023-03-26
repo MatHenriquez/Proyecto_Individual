@@ -1,3 +1,5 @@
+
+
 .ul{
     display: flex;
     text-decoration: none;
@@ -14,8 +16,16 @@
     right: 0;
     bottom: 0;
     margin: auto auto 5px auto;
+    height: 3vh;
 }
 
 .li:hover{
     cursor: pointer;
+    font-size: x-large;
+}
+
+.current{
+    padding: 0px 5px;
+    background-color: rgba(255, 255, 0, 0.9);
+    border-radius: 50%;
 }

@@ -10,7 +10,7 @@ function Pagination ({pokemonsPerPage, pokemons, pagination, currentPage}){ // d
     pageNumber.push(i+1);
   }
   return (
-    <nav>
+    <nav className={styles.nav}>
         <ul className={styles.ul}>
         <li className={styles.li}>
             <span onClick={() => pagination(1)}>{'|<'}</span>
@@ -19,15 +19,14 @@ function Pagination ({pokemonsPerPage, pokemons, pagination, currentPage}){ // d
             <span onClick={() => {
               if(actualPage > 1)
               pagination(actualPage - 1)}
-            }
-            >
+            }>
               {'<<'}
-              </span>
+            </span>
           </li>
            {
            pageNumber?.map(number => (
             < li key={number} className={styles.li}>
-              <span onClick={() => pagination(number)}>{number}</span>   
+              <span onClick={() => pagination(number)} className={actualPage === number ? styles.current : null }>{number}</span>   
             </li>
            )
             )
