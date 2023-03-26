@@ -8,15 +8,14 @@ module.exports = (sequelize) => {
     ID: {
       type: DataTypes.UUID, 
       defaultValue: DataTypes.UUIDV4,
-      // type: DataTypes.INTEGER, 
-      // autoIncrement: true,
       primaryKey: true,
       allowNull: false
     },
 
     Nombre: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      
     },
 
     Imagen: {
@@ -55,5 +54,3 @@ module.exports = (sequelize) => {
   });
   
 };
-
-//Agregar identificador de que fue creado por el user.

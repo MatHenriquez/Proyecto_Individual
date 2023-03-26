@@ -29,6 +29,8 @@ export default function Home(){
     const [loading, setLoading] = useState (false); //Manejo la imagen de carga.
 
     const [currentSort, setCurrentSort] = useState(null); //Para seleccionar un solo ordenamiento a la vez.
+    
+    const [currentFilter, setCurrentFilter] = useState(null); //Para seleccionar un solo filtro a la vez.
 
     //PAGINADO:
   const [currentPage, setCurrentPage]= useState(1) //Mi página actual que arraca en 1.
@@ -44,7 +46,6 @@ export default function Home(){
       dispatch(getPokemons())
         .finally(() => setLoading(false));
       dispatch(getPokemonsTypes());
-
       }, [dispatch]);
 
   
@@ -52,12 +53,14 @@ export default function Home(){
       function handleTypesFilter(event) {
         event.preventDefault();
         setCurrentPage(1);
+        setCurrentFilter("type");
         dispatch(filterPokemonsByType(event.target.value));
       }
 
       function handleOriginFilter(event) {
         event.preventDefault();
         setCurrentPage(1);
+        setCurrentFilter("origin");
         dispatch(filterPokemonsByOrigin(event.target.value));
       }
 
@@ -115,14 +118,14 @@ export default function Home(){
 
         <span className={styles.optionTitle}>Filtrar por :</span>
         <select className={styles.select} onChange={(event) => handleOriginFilter(event)} >
-          <option className={styles.option} disabled selected>Origen</option>
+          <option className={styles.option} disabled selected={!currentFilter || currentFilter === "type"}>Origen</option>
           <option className={styles.option} value="all">Todos los pokemons</option>
           <option className={styles.option} value="api">Pokemons de la serie</option>
           <option className={styles.option} value="db">Tus pokemons</option>
         </select>
 
         <select className={styles.select} onChange={(event) => handleTypesFilter(event)}>
-        <option className={styles.option} disabled selected>Tipo</option>
+        <option className={styles.option} disabled selected={!currentFilter || currentFilter === "origin"}>Tipo</option>
           <option className={styles.option} value ='all'>Todos los tipos</option>
           {types?.map(type => (
                 <option className={styles.option} key={type} value={type}>
