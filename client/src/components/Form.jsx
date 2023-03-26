@@ -4,11 +4,14 @@ import { createPokemon, getPokemonsTypes } from '../actions/index';
 import styles from '../styles/form.module.css'
 
 
-function validate(inputs){
+function validate(inputs, pokemons){
     const stringRegExp = /^[a-zA-Z]{1,20}$/;
     const numberRegExp = /^([1-9][0-9]{0,2}|1000)$/;
     const urlRegExp = /^(?=.{1,255}$)(http|https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/; //Me fijo que no tenga más de 255 caracteres, ya que el modelo pokemon usa datatype varchar en la url.
 
+
+    
+    const foundedSomePokemon = pokemons.map(pokemon => pokemon.Nombre.toLowerCase() === inputs.Nombre.toLowerCase() ?  true :  false);
 
     let errors = {};
 
@@ -16,7 +19,10 @@ function validate(inputs){
         errors.Nombre = '*Ingrese un nombre.'
     }  else if (!stringRegExp.test(inputs.Nombre)) {
         errors.Nombre = '*Nombre inválido.';
+    } else if(foundedSomePokemon){
+        errors.Nombre = `El pokemon ${inputs.Nombre} ya existe.`;
     }
+    
 
     if(!inputs.Imagen){
         errors.Imagen = '*Ingrese una URL para la imagen.';
@@ -53,6 +59,8 @@ function validate(inputs){
 }
 
 export default function Form(){
+
+    const pokemons = useSelector(state => state.allPokemons);
 
     const dispatch = useDispatch();
 
@@ -98,7 +106,7 @@ export default function Form(){
       //Hago todo esto porque el disabler estaba usando el estado anterior de errors.
       setInputs(newInputs);
   
-      const newErrors = validate(newInputs);
+      const newErrors = validate(newInputs, pokemons);
       setErrors(newErrors);
   
       const hasErrors = Object.keys(newErrors).length > 0;
