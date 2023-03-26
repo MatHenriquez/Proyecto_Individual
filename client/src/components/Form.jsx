@@ -7,7 +7,8 @@ import styles from '../styles/form.module.css'
 function validate(inputs){
     const stringRegExp = /^[a-zA-Z]{1,20}$/;
     const numberRegExp = /^([1-9][0-9]{0,2}|1000)$/;
-    const urlRegExp = /(http|https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/;
+    const urlRegExp = /^(?=.{1,255}$)(http|https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/; //Me fijo que no tenga más de 255 caracteres, ya que el modelo pokemon usa datatype varchar en la url.
+
 
     let errors = {};
 
@@ -73,7 +74,7 @@ export default function Form(){
 
     const [errors, setErrors] = useState({});
 
-    const types = useSelector(state => state.pokemonTypes);
+    const types = useSelector(state => state.types);
 
 
     function handleInputChange(event) {

@@ -88,7 +88,6 @@ export function createPokemon(newPokemon){
         await axios
         .post(`${URL}/pokemons`, newPokemon)
         .then((response) =>{
-            console.log(response.data);
             return dispatch({
                 type: CREATE_POKEMON,
                 payload: response.data
@@ -100,18 +99,18 @@ export function createPokemon(newPokemon){
 
 //Función que ordena pokemons por ataque según un criterio ascendente o descendente.
 export function sortPokemonsByAttack(criterion){
-    return ({
+    return {
         type: ORDER_POKEMONS_BY_ATTACK,
         payload: criterion
-    });
+    };
 };
 
 //Función que ordena pokemons por nombre alfabéticamente según un criterio ascendente o descendente.
 export function sortPokemonsByName(criterion){
-    return ({
+    return {
         type: ORDER_POKEMONS_BY_NAME,
         payload: criterion
-    });
+    };
 };
 
 //Función que filtra pokemons basada en su origen (API o DB).
