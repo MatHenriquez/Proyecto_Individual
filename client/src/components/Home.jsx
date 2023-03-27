@@ -26,7 +26,7 @@ export default function Home(){
 
     const types = useSelector((state) => state.types);
 
-    const [loading, setLoading] = useState (false); //Manejo la imagen de carga.
+    const [loading, setLoading] = useState (true); //Manejo la imagen de carga.
 
     const [currentSort, setCurrentSort] = useState(null); //Para seleccionar un solo ordenamiento a la vez.
     
@@ -39,16 +39,13 @@ export default function Home(){
   const indexOfFirstPokemon= indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = Array.isArray(pokemons) ? pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) : [];  //Constante que guarda todos los pokemons que voy a tener por pagina.
 
-   
     useEffect(() => {
 
       setLoading(true);
       dispatch(getPokemons())
         .finally(() => setLoading(false));
       dispatch(getPokemonsTypes());
-      }, [dispatch]);
-
-  
+      }, []);
 
       function handleTypesFilter(event) {
         event.preventDefault();
