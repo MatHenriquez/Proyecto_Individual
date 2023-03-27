@@ -69,14 +69,14 @@ export default function Home(){
       function handleSortNames(event) {
         event.preventDefault();
         setCurrentPage(1);
-        setCurrentSort("name");
+        setCurrentSort(event.target.value);
         dispatch(sortPokemonsByName(event.target.value));
       }
 
       function handleSortAttacks(event) {
         event.preventDefault();
         setCurrentPage(1);
-        setCurrentSort("attack");
+        setCurrentSort("event.target.value");
         dispatch(sortPokemonsByAttack(event.target.value));
       }
 
@@ -103,15 +103,15 @@ export default function Home(){
 
         <span className={styles.optionTitle}>Ordenar por:</span>
         <select className={styles.select} onChange={(event) => handleSortNames(event)}>
-          <option className={styles.option} disabled selected={!currentSort || currentSort === "attack"}>Nombre</option>
-          <option className={styles.option} value="ascendent">Ascendente</option>
-          <option className={styles.option} value="descendent">Descendente</option>
+          <option className={styles.option} disabled selected={ !currentSort || currentSort==='attack'}>Nombre</option>
+          <option className={styles.option} value="ascendent" selected={currentSort==='ascendent'}>Ascendente</option>
+          <option className={styles.option} value="descendent" selected={currentSort==='descendent'}>Descendente</option>
         </select>
 
         <select className={styles.select} onChange={(event) => handleSortAttacks(event)}>
-          <option className={styles.option} disabled selected={!currentSort || currentSort === "name"}>Ataque</option>
-          <option className={styles.option} value="ascendent">Ascendente</option>
-          <option className={styles.option} value="descendent">Descendente</option>
+          <option className={styles.option} disabled selected={ !currentSort || currentSort==='name'}>Ataque</option>
+          <option className={styles.option} value="ascendentAttack" selected={currentSort==='ascendentAttack'}>Ascendente</option>
+          <option className={styles.option} value="descendentAttack" selected={currentSort==='descendentAttack'}>Descendente</option>
         </select>
 
         <hr className={styles.hr} />

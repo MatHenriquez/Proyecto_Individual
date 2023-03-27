@@ -68,7 +68,7 @@ const reducer = (state = initialState, action) => {
         
 
         case ORDER_POKEMONS_BY_ATTACK:
-            if (action.payload === 'ascendent') {
+            if (action.payload === 'ascendentAttack') {
                     const filteredAndSortedPokemons = state.filteredPokemons.slice().sort((a, b) => //Utilizo el método slice() para crear una copia del array antes de ordenarlo.
                     a.Ataque > b.Ataque ? 1 : -1
                 );
@@ -80,7 +80,7 @@ const reducer = (state = initialState, action) => {
                     sortedPokemons,
                     pokemons: filteredAndSortedPokemons,
                 };
-            } else if (action.payload === 'descendent') {
+            } else if (action.payload === 'descendentAttack') {
                     const filteredAndSortedPokemons = state.filteredPokemons.slice().sort((a, b) =>
                     a.Ataque < b.Ataque ? 1 : -1
                 );
