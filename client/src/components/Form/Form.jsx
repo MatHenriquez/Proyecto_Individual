@@ -20,9 +20,24 @@ export function validate(inputs, pokemons){
     }  else if (!stringRegExp.test(inputs.Nombre)) {
         errors.Nombre = '*Nombre inválido.';
     } else if(pokemonAlreadyExists){
-        errors.Nombre = `El pokemon ${inputs.Nombre} ya existe.`;
+        errors.Nombre = `*El pokemon ${inputs.Nombre} ya existe.`;
     }
     
+
+    if(inputs.Altura){
+        if(!numberRegExp.test(inputs.Altura))
+        errors.Altura = '*Los datos no obligatorios también deben ser correctos'
+    }
+
+    if(inputs.Peso){
+        if(!numberRegExp.test(inputs.Peso))
+        errors.Peso = '*Los datos no obligatorios también deben ser correctos'
+    }
+
+    if(inputs.Velocidad){
+        if(!numberRegExp.test(inputs.Velocidad))
+        errors.Velocidad = '*Los datos no obligatorios también deben ser correctos'
+    }
 
     if(!inputs.Imagen){
         errors.Imagen = '*Ingrese una URL para la imagen.';
