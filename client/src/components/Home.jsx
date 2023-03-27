@@ -39,13 +39,18 @@ export default function Home(){
   const indexOfFirstPokemon= indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = Array.isArray(pokemons) ? pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) : [];  //Constante que guarda todos los pokemons que voy a tener por pagina.
 
+  //Evitar reenderrizar todo de nuevo al navegar.
+  
     useEffect(() => {
-
       setLoading(true);
-      dispatch(getPokemons())
-        .finally(() => setLoading(false));
+      if (!pokemons.length) {
+        dispatch(getPokemons())
+          .finally(() => setLoading(false));
+      } else {
+        setLoading(false);
+      }
       dispatch(getPokemonsTypes());
-      }, []);
+    }, [dispatch, pokemons]);
 
       function handleTypesFilter(event) {
         event.preventDefault();
