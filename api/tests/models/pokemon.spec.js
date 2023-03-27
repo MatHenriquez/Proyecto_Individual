@@ -10,63 +10,55 @@ describe("Pokemon model", () => {
   describe("Validators", () => {
     beforeEach(() => Pokemon.sync({ force: true }));
 
-    describe("Name", () => {
-      it("Arroja un error si name es null", (done) => {
-        Pokemon.create({})
-          .then(() => done(new Error("It requires a valid name")))
-          .catch(() => done());
-      }).timeout(7000);
+    it("Arroja un error si el pokemon no tiene nombre.", (done) => {
+      Pokemon.create({
+        Nombre: null,
+        Imagen: "http://www.example.com",
+        Vida: 100,
+        Ataque: 50,
+        Defensa: 30
+      })
+        .then(() => done(new Error("La validación no funcionó")))
+        .catch(() => done());
+    });
 
-      it("Funciona si el name es válido", () => {
-        Pokemon.create({ name: "Pikachu" })
-      }).timeout(7000);
+
+    it("Arroja un error si el pokemon no tiene ataque.", (done) => {
+      Pokemon.create({
+        Nombre: 'SantaClaus',
+        Imagen: "http://www.example.com",
+        Vida: 100,
+        Ataque: null,
+        Defensa: 30
+      })
+        .then(() => done(new Error("La validación no funcionó")))
+        .catch(() => done());
+    });
+      
+
+    it("Arroja un error si el pokemon tiene una defensa no válida.", (done) => {
+      Pokemon.create({
+        Nombre: 'Pokamone',
+        Imagen: "http://www.example.com",
+        Vida: 100,
+        Ataque: 50,
+        Defensa: null
+      })
+        .then(() => done(new Error("La validación no funcionó")))
+        .catch(() => done());
+    });
+
+    it("Crea el pokemon si los datos son válidos.", (done) => {
+      Pokemon.create({
+        Nombre: 'Pokamone',
+        Imagen: "http://www.example.com",
+        Vida: 100,
+        Ataque: 50,
+        Defensa: 100
+      })
+        .then(() => done());
     });
   });
-
-  describe("Stats", () => {
-    it("Arroja un error si vida no es numero", (done) => {
-      Pokemon.create({ name: "Pikachu", vida: "asd" })
-        .then(() => done(new Error("Vida no es un numero")))
-        .catch(() => done());
-    }).timeout(7000);
-
-    it("Arroja un error si fuerza no es numero", (done) => {
-      Pokemon.create({ name: "Pikachu", fuerza: "asd" })
-        .then(() => done(new Error("Fuerza no es un numero")))
-        .catch(() => done());
-    }).timeout(7000);
-
-    it("Arroja un error si defensa no es numero", (done) => {
-      Pokemon.create({ name: "Pikachu", defensa: "asd" })
-        .then(() => done(new Error("Defensa no es un numero")))
-        .catch(() => done());
-    }).timeout(7000);
-
-    it("Arroja un error si velocidad no es numero", (done) => {
-      Pokemon.create({ name: "Pikachu", velocidad: "asd" })
-        .then(() => done(new Error("Velocidad no es un numero")))
-        .catch(() => done());
-    }).timeout(7000);
-
-    it("Arroja un error si altura no es numero", (done) => {
-      Pokemon.create({ name: "Pikachu", altura: "asd" })
-        .then(() => done(new Error("Altura no es un numero")))
-        .catch(() => done());
-    }).timeout(7000);
-
-    it("Arroja un error si peso no es numero", (done) => {
-      Pokemon.create({ name: "Pikachu", peso: "asd" })
-        .then(() => done(new Error("Peso no es un numero")))
-        .catch(() => done());
-    });
-
-    it("Funciona si no se pasa un valor algun valor", () => {
-      Pokemon.create({ name: "Pikachu" });
-      Pokemon.create({ name: "Pikachu", vida: 100});
-      Pokemon.create({ name: "Pikachu", defensa: 100 });
-      Pokemon.create({ name: "Pikachu", velocidad: 100 });
-      Pokemon.create({ name: "Pikachu", altura: 100 });
-    });
-
   });
-});
+
+  
