@@ -39,18 +39,18 @@ export default function Home(){
   const indexOfFirstPokemon= indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = Array.isArray(pokemons) ? pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) : [];  //Constante que guarda todos los pokemons que voy a tener por pagina.
 
-  //Evitar reenderrizar todo de nuevo al navegar.
+  useEffect(() => {
+    setLoading(true);
+    if (!pokemons.length) {
+      dispatch(getPokemons())
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
+    }
+    dispatch(getPokemonsTypes());
+  }, [dispatch, pokemons]);
+
   
-    useEffect(() => {
-      setLoading(true);
-      if (!pokemons.length) {
-        dispatch(getPokemons())
-          .finally(() => setLoading(false));
-      } else {
-        setLoading(false);
-      }
-      dispatch(getPokemonsTypes());
-    }, [dispatch, pokemons]);
 
       function handleTypesFilter(event) {
         event.preventDefault();
@@ -69,14 +69,14 @@ export default function Home(){
       function handleSortNames(event) {
         event.preventDefault();
         setCurrentPage(1);
-        setCurrentSort(event.target.value);
+        setCurrentSort("name");
         dispatch(sortPokemonsByName(event.target.value));
       }
 
       function handleSortAttacks(event) {
         event.preventDefault();
         setCurrentPage(1);
-        setCurrentSort("event.target.value");
+        setCurrentSort("attack");
         dispatch(sortPokemonsByAttack(event.target.value));
       }
 
@@ -103,15 +103,15 @@ export default function Home(){
 
         <span className={styles.optionTitle}>Ordenar por:</span>
         <select className={styles.select} onChange={(event) => handleSortNames(event)}>
-          <option className={styles.option} disabled selected={ !currentSort || currentSort==='attack'}>Nombre</option>
-          <option className={styles.option} value="ascendent" selected={currentSort==='ascendent'}>Ascendente</option>
-          <option className={styles.option} value="descendent" selected={currentSort==='descendent'}>Descendente</option>
+          <option className={styles.option} disabled selected={!currentSort || currentSort === "attack"}>Nombre</option>
+          <option className={styles.option} value="ascendent">Ascendente</option>
+          <option className={styles.option} value="descendent">Descendente</option>
         </select>
 
         <select className={styles.select} onChange={(event) => handleSortAttacks(event)}>
-          <option className={styles.option} disabled selected={ !currentSort || currentSort==='name'}>Ataque</option>
-          <option className={styles.option} value="ascendentAttack" selected={currentSort==='ascendentAttack'}>Ascendente</option>
-          <option className={styles.option} value="descendentAttack" selected={currentSort==='descendentAttack'}>Descendente</option>
+          <option className={styles.option} disabled selected={!currentSort || currentSort === "name"}>Ataque</option>
+          <option className={styles.option} value="ascendent">Ascendente</option>
+          <option className={styles.option} value="descendent">Descendente</option>
         </select>
 
         <hr className={styles.hr} />
