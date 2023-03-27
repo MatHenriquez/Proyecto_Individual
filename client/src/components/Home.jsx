@@ -104,14 +104,12 @@ export default function Home(){
         <span className={styles.optionTitle}>Ordenar por:</span>
         <select className={styles.select} onChange={(event) => handleSortNames(event)}>
           <option className={styles.option} disabled selected={!currentSort || currentSort === "attack"}>Nombre</option>
-          <option className={styles.option} value="default">Por defecto</option>
           <option className={styles.option} value="ascendent">Ascendente</option>
           <option className={styles.option} value="descendent">Descendente</option>
         </select>
 
         <select className={styles.select} onChange={(event) => handleSortAttacks(event)}>
           <option className={styles.option} disabled selected={!currentSort || currentSort === "name"}>Ataque</option>
-          <option className={styles.option} value="default">Por defecto</option>
           <option className={styles.option} value="ascendent">Ascendente</option>
           <option className={styles.option} value="descendent">Descendente</option>
         </select>
