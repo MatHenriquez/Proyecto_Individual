@@ -32,6 +32,9 @@ export default function Home(){
     
     const [currentFilter, setCurrentFilter] = useState(null); //Para seleccionar un solo filtro a la vez.
 
+    const [pokemonsFetched, setPokemonsFetched] = useState(false); // Variable de estado para verificar si ya se obtuvieron los pokemons.
+
+
     //PAGINADO:
   const [currentPage, setCurrentPage]= useState(1) //Mi página actual que arraca en 1.
   const pokemonsPerPage = 12; // Mis pokemons por página que son 12.
@@ -39,14 +42,15 @@ export default function Home(){
   const indexOfFirstPokemon= indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = Array.isArray(pokemons) ? pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) : [];  //Constante que guarda todos los pokemons que voy a tener por pagina.
 
-  useEffect(() => {
-    
-    dispatch(getPokemons())
-        .finally(() => setLoading(false));
-    dispatch(getPokemonsTypes());
-  }, [dispatch, pokemons]);
 
-  
+      useEffect(() => {
+        if (!pokemonsFetched) { // Verificar si ya se obtuvieron los pokemons.
+          dispatch(getPokemons())
+            .finally(() => setLoading(false));
+          dispatch(getPokemonsTypes());
+          setPokemonsFetched(true); // Actualizar el estado de los pokemons.
+        }
+      }, [dispatch, pokemonsFetched]);
 
       function handleTypesFilter(event) {
         event.preventDefault();
