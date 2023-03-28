@@ -7,8 +7,8 @@
 
 .generalContainer{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center;/*probar space-around para mover el paginado*/
+    align-items: center;/*probar space-around para mover el paginado*/ 
     margin-left: 250px;
 }
 

@@ -137,6 +137,7 @@ const reducer = (state = initialState, action) => {
         case FILTER_POKEMONS_BY_TYPE: 
 
         const type = action.payload; //types debería llegar como un string "flying"
+        console.log(action.payload)
 
         if (type === 'all'){
             return {
@@ -146,6 +147,7 @@ const reducer = (state = initialState, action) => {
             };
         } else {
             const filteredPokemons = state.sortedPokemons.slice().filter((pokemon) => pokemon.Types.includes(type));
+            console.log(filteredPokemons)
             return {
                 ...state,
                 pokemons: filteredPokemons,

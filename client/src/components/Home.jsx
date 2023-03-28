@@ -40,13 +40,9 @@ export default function Home(){
   const currentPokemons = Array.isArray(pokemons) ? pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) : [];  //Constante que guarda todos los pokemons que voy a tener por pagina.
 
   useEffect(() => {
-    setLoading(true);
-    if (!pokemons.length) {
-      dispatch(getPokemons())
+    
+    dispatch(getPokemons())
         .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
-    }
     dispatch(getPokemonsTypes());
   }, [dispatch, pokemons]);
 
