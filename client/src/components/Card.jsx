@@ -16,7 +16,9 @@ export default function Card({id, name, image, types}){
                     <div>
                         <h4 className={styles.types} >Tipos:</h4>
                         {
+                            types?
                             types.map((type, index) => <h4 className={styles.types} key={index}>{`- ${type}`}</h4>)
+                            : <h4  className={styles.types}>No encontrado.</h4>
                         }
                     </div>
 

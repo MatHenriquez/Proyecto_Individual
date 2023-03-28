@@ -6,7 +6,7 @@ import styles from '../styles/foundedPokemon.module.css'
 export default function FoundedPokemon(){ 
 
     
-    const pokemon = useSelector((state) => state.searchedPokemons[0]);
+    const pokemon = useSelector((state) => state.searchedPokemons);
 
     return (
         <div className={styles.back}>
