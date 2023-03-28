@@ -7,9 +7,6 @@ function Pagination ({pokemonsPerPage, pokemons, pagination, currentPage}){ // d
 
   const actualPage = currentPage;
 
-  if(Math.floor(pokemons.length/pokemonsPerPage)===1) pageNumber.push(1) //Para que muestre al menos 1 página. 
-
-
   for (let i = 0; i < Math.floor(pokemons.length/pokemonsPerPage); i++) {//Saqué el <= del for porque crea una página vacía cuando la cantidad de pokemons es un múltiplo de 12.
     pageNumber.push(i+1);
   }
