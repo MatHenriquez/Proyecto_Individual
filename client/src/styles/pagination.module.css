@@ -8,6 +8,10 @@
     font-size: large;
     background-color: rgba(255, 255, 0, 0.2);
     height: 3vh;
+    margin: 50px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    width: 150vh;
 }
 
 .li:hover{

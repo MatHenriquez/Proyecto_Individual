@@ -7,8 +7,8 @@
 
 .generalContainer{
     display: flex;
-    justify-content: center;/*probar space-around para mover el paginado*/
-    align-items: center;/*probar space-around para mover el paginado*/ 
+    justify-content: center;
+    align-items: center;
     margin-left: 250px;
 }
 
@@ -26,7 +26,7 @@
 
 .orderPagination{
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 .CardsContainer{
