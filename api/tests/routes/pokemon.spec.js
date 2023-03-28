@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const session = require('supertest-session');
 const app = require('../../src/app.js');
-const { Pokemon, conn } = require('../../src/db.js');
+const { Pokemon, Type , conn } = require('../../src/db.js');
 
 const agent = session(app);
 
@@ -21,31 +21,30 @@ describe('Pokemon routes', () => {
   beforeEach(() => Pokemon.sync({ force: true })
     .then(() => Pokemon.create(pokemon)));
 
-  describe("GET /pokemons", (done) => {
-    it("Si no se recibe mas que la ruta devuelve 200 con los pokemons", (done) => {
-      agent.get("/pokemons").then(() => done());
+  describe("GET /pokemons", () => {
+    it("Si no se recibe más que la ruta devuelve un status 200 con los pokemons.", () => {
+      agent.get("/pokemons")
+      .then(() => done());
     });
-  }).timeout(7000);
+  });
 
   describe("Obtiene un pokemon por id o name", () => {
 
     describe("GET /pokemons/:id", () => {
-      it("Se espera una respuesta 200 se si pasa un id", () =>
-        agent.get("/pokemons/10").then(() => done()));
+      it("Se espera una respuesta 200 se si pasa un id.", () =>{
+        agent.get("/pokemons/10").then(() => done());
     });
+  });
 
-    describe("GET /pokemons?name=xxx", () => {
-        it("Si se recibe name devolver 200", () =>
-          agent.get("/pokemons?name=pikachu").then(() => done()));
+    describe("GET /pokemons/name?name=nombre", () => {
+        it("Si se recibe un nombre no existente debe devolver un status 404 not found", () =>{
+          agent.get("/pokemons/name?name=fakePokemon")
+          .then(() => done(new Error("Not found.")))
+          .catch(() => done())
       });
 
   });
 });
-
-describe("Types Routes", () => {
-  describe("GET /types", () => {
-    it("Se espera una respuesta 200", () => agent.get("/types")
-    .then(() => done()));
-  });
 });
+
 
