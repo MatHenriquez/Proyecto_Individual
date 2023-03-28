@@ -2,11 +2,23 @@ import React from "react";
 import styles from '../styles/pagination.module.css'
 
 function Pagination ({pokemonsPerPage, pokemons, pagination, currentPage}){ // declaro mi paginado, traigo las props del otro componente
-  const pageNumber = []
+
+  let pageNumber = []
+
+  if(Math.floor(pokemons.length/pokemonsPerPage) <= 1){//Para que muestre al menos 1 página.
+     pageNumber = [1]
+  } else {
+    pageNumber = []
+  }
+
+  
 
   const actualPage = currentPage;
 
-  for (let i = 0; i <= Math.floor(pokemons.length/pokemonsPerPage); i++) {
+  if(Math.floor(pokemons.length/pokemonsPerPage)===1) pageNumber.push(1) //Para que muestre al menos 1 página. 
+
+
+  for (let i = 0; i < Math.floor(pokemons.length/pokemonsPerPage); i++) {//Saqué el <= del for porque crea una página vacía cuando la cantidad de pokemons es un múltiplo de 12.
     pageNumber.push(i+1);
   }
   return (

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPokemon, getPokemonsTypes } from '../../actions/index';
-import styles from '../../styles/form.module.css'
+import { createPokemon, getPokemonsTypes, getPokemonByName } from '../../actions/index';
+import styles from '../../styles/form.module.css';
+
 
 
 export function validate(inputs, pokemons){
@@ -141,7 +142,7 @@ export default function Form(){
         if(Object.keys(errors).length > 0){
             alert('El formulario no se llenó correctamente.');
         } else {
-            dispatch(createPokemon(inputs));
+             dispatch(createPokemon(inputs))
         }
     }
 

@@ -62,6 +62,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allPokemons: [...state.allPokemons, action.payload], 
+                pokemons: [...state.allPokemons, action.payload]
             };
         }
 
