@@ -1,5 +1,6 @@
 const { Router } = require("express");
 
+const {Pokemon} = require('../db')
 // const getPokemons_API = require("../controllers/getPokemons/getPokemons_API");
 // const getPokemons_DB = require("../controllers/getPokemons/getPokemons_DB");
 const getPokemons = require("../controllers/getPokemons");
@@ -66,6 +67,17 @@ pokemonsRouter.post('/', async (req, res) => {
     }
 });
 
-
+pokemonsRouter.delete("/delete/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const pokemon = await Pokemon.findByPk(id);
+      if (pokemon !== null) {
+        await pokemon.destroy();
+        res.json(`Pokemon ${pokemon.Nombre} deleted correctly`);
+      }
+    } catch (e) {
+      return res.status(404).json("Error ---> " + e);
+    }
+});
 
 module.exports = pokemonsRouter;
