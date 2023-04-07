@@ -1,8 +1,11 @@
 .background {
     background-image: url('../resources/bg.png');
     background-size: cover;
-    min-height: 97vh;
-    padding: 14.5px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .title {
@@ -10,24 +13,17 @@
     color: #FFEA00;
     font-size: 60px;
     box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
+    border-radius: 6%;
 }
 
 .btn {
+    margin-bottom: 7%;
     background-color: #FFEA00;
     color: #FF7B00;
     border: 2px solid #FF7B00;
     font-weight: bold;
     font-size: xx-large;
-    padding: 10px;
     border-radius: 15%;
-    width: 9%;
-    height: 60px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto auto 40px auto;
     box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
 }
 
@@ -37,4 +33,24 @@
     cursor: pointer;
     border: 2px solid #FFEA00;
     box-shadow: 0px 0px 50px rgba(255, 255, 0, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+    .background {
+        background-image: url('../resources/fondo-cel.jpg');
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .title {
+        padding: 1%;
+        color: #FFEA00;
+        font-size: 40px;
+        box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
+        border-radius: 6%;
+    }
 }

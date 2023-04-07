@@ -9,6 +9,9 @@ import Landing from './components/Landing';
 import Nav from './components/Nav';
 import NotFound from './components/NotFound';
 import FoundedPokemon from './components/FoundedPokemon';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://backpi-production-fc48.up.railway.app';
 
 function App() {
 

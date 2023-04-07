@@ -6,10 +6,14 @@
 }
 
 .generalContainer{
+    min-height: 75vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 250px;
+    margin-left: 15vw;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 80vw;
 }
 
 .formContainer{
@@ -26,15 +30,17 @@
 
 .orderPagination{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .CardsContainer{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    column-gap: 130px;
-    row-gap: 10px;
+    column-gap: 7%;
+    row-gap: 2vh;
 }
 
 .title {

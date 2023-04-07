@@ -14,14 +14,15 @@ import {
 
 import axios from 'axios';
 
-const URL = 'http://localhost:3001';
+//const URL = 'https://localhost:3001';
+
 
 
 // Función que muestra los pokemons de la API y la DB.
 export function getPokemons(){
     return async function(dispatch){
         await axios
-        .get(`${URL}/pokemons`)
+        .get(`/pokemons`)
         .then((response) =>{
             return dispatch({
                 type: GET_POKEMONS,
@@ -39,7 +40,7 @@ export function getPokemons(){
 export function getPokemonDetails(id){
     return async function(dispatch){
         await axios
-        .get(`${URL}/pokemons/${id}`)
+        .get(`/pokemons/${id}`)
         .then((response) =>{
             return dispatch(
                 {
@@ -55,7 +56,7 @@ export function getPokemonDetails(id){
 export function getPokemonByName(name){
     return async function(dispatch){
         await axios
-        .get(`${URL}/pokemons/name?name=${name}`)
+        .get(`/pokemons/name?name=${name}`)
         .then((response) =>{
             return dispatch({
                 type: GET_POKEMONS_BY_NAME,
@@ -70,7 +71,7 @@ export function getPokemonByName(name){
 export function getPokemonsTypes(){
     return async function(dispatch){
         await axios
-        .get(`${URL}/types`)
+        .get(`/types`)
         .then((response) =>{
             return dispatch({
                 type: GET_POKEMONS_TYPES,
@@ -86,7 +87,7 @@ export function getPokemonsTypes(){
 export function createPokemon(newPokemon){
     return async function(dispatch){
         await axios
-        .post(`${URL}/pokemons`, newPokemon)
+        .post(`/pokemons`, newPokemon)
         .then((response) =>{
             return dispatch({
                 type: CREATE_POKEMON,

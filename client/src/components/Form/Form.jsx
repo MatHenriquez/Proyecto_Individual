@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPokemon, getPokemonsTypes, getPokemonByName } from '../../actions/index';
+import { createPokemon, getPokemonsTypes } from '../../actions/index';
 import styles from '../../styles/form.module.css';
 
 
