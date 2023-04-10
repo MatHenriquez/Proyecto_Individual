@@ -94,8 +94,9 @@ export default function Home(){
         <div>
         </div>
         ) : (
+          
           <div className={styles.formContainer}>
-        <div className={styles.options}>
+            <div className={styles.options}>
       <Link to='/form' className={styles.linkToForm}>Crea tu propio pokemon.</Link>
 
      

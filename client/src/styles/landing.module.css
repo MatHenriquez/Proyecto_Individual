@@ -17,7 +17,7 @@
 }
 
 .btn {
-    margin-bottom: 7%;
+    margin-bottom: 25%;
     background-color: #FFEA00;
     color: #FF7B00;
     border: 2px solid #FF7B00;
@@ -25,6 +25,7 @@
     font-size: xx-large;
     border-radius: 15%;
     box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
+    padding: 5%;
 }
 
 .btn:hover{
@@ -39,7 +40,7 @@
     .background {
         background-image: url('../resources/fondo-cel.jpg');
         background-size: cover;
-        height: 100vh;
+        height: 94vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -52,5 +53,16 @@
         font-size: 40px;
         box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
         border-radius: 6%;
+    }
+
+    .btn {
+        margin-bottom: 25%;
+        background-color: #0095ff;
+        color: #3c00ff;
+        border: 2px solid #3c00ff;
+        font-weight: bold;
+        font-size: xx-large;
+        border-radius: 15%;
+        box-shadow: 0px 0px 25px rgba(130, 223, 232, 0.855);
     }
 }

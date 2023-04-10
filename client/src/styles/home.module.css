@@ -28,6 +28,8 @@
     margin: 270px auto auto auto;
 }
 
+
+
 .orderPagination{
     display: flex;
     flex-direction: column-reverse;
@@ -121,4 +123,41 @@
 .hr{
     border-color: red;
     width: 150px;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+
+    
+}
+
+@media screen and (max-width: 768px) {
+    .back{
+        background-image: none;
+        background-color: rgb(153, 173, 24);
+    }
+
+    .title {
+        background-color: #f38c25;
+        color: #ea0b0b;
+        font-size: 60px;
+        box-shadow: 0px 0px 25px rgba(255, 0, 0, 0.5);
+    }
+
+    .generalContainer{
+        margin-left: 10vw;
+    }
+
+    .linkToForm{
+        padding: 1%;
+    }
+
+    .formContainer{
+        margin: 45% 0%;
+        position: fixed;
+    }
+
+    .FilterImg{
+        background-image: url(../resources/filter.png);
+        display: flex;
+    }
 }
