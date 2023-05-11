@@ -14,6 +14,7 @@ const pokemonsRouter = Router();
 
 //Obtener todos los pokemons de la API y la DB.
 pokemonsRouter.get('/', async (req, res) => {
+    console.log("in");
     try {
         const allPokemons = await getPokemons();
 

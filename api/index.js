@@ -22,10 +22,10 @@ const { conn } = require('./src/db');
 
 //Para deploy
 require('dotenv').config();
-const port = process.env.PORT || 3001;
+const port = 3001;
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ alter: true }).then(() => {
   server.listen(port, () => {
     console.log(`%s listening at ${port}`); // eslint-disable-line no-console
   });
