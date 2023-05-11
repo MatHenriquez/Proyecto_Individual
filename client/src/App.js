@@ -11,8 +11,8 @@ import NotFound from './components/NotFound';
 import FoundedPokemon from './components/FoundedPokemon';
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'https://backpi-production-fc48.up.railway.app';
-axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = 'https://pokemon-service-59yk.onrender.com';
+// axios.defaults.baseURL = 'http://localhost:3001';
 
 function App() {
 
