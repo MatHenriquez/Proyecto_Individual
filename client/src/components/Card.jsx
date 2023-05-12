@@ -13,7 +13,7 @@ export default function Card({id, name, image, types}){
                 <div className={styles.card}>
                     <h3 className={styles.name}>{name}</h3>
                     <img src={image} alt={name} className={styles.img}/>
-                    <div>
+                    <div className={styles.typesContainer}>
                         <h4 className={styles.types} >Tipos:</h4>
                         {
                             types?

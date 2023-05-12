@@ -1,31 +1,24 @@
 .back{
-    background-image: url('../resources/neonBack.jpg');
+    background-image: url('../resources/pixeledBG.jpg');
     background-size: cover;
-    min-height: 91.5vh;
-    padding-top: 20px;
+    min-height: 92vh;
+    /* padding-top: 200px; */
 }
 
 .generalContainer{
-    min-height: 75vh;
+    height: 60vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 15vw;
-    align-items: stretch;
     justify-content: space-between;
-    width: 80vw;
+    width: 90vw;
 }
 
 .formContainer{
     justify-content: end;
-    position: absolute;
-    width: 250px;
-    height: 500px;
-    top: 0;
-    left: 0;
-    right: 1;
-    bottom: 1;
-    margin: 270px auto auto auto;
+    position: relative;
+    width: 25vw;
+    height: 60%;
 }
 
 
@@ -38,17 +31,19 @@
 }
 
 .CardsContainer{
+    margin-top: 200px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    column-gap: 7%;
+    column-gap: 4%;
     row-gap: 2vh;
 }
 
 .title {
     color: #FF7B00;
     font-size: 60px;
-    box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.5);
+    box-shadow: 0px 0px 25px rgba(26, 69, 3, 0.5);
+    margin-top: 0px;
 }
 
 .loading{
@@ -81,7 +76,7 @@
     background-color: rgba(255, 255, 0, 0.95);
     display: flex;
     flex-direction: column;
-    height: 600px;
+    height: 40vh;
     justify-content: space-around;
     align-items: center;
 }
@@ -92,7 +87,7 @@
     color: rgb(255, 255, 0);
     text-decoration: none;
     border-radius: 10%;
-    padding: 10px;
+    padding: 2vh;
     background-color: red;
 }
 

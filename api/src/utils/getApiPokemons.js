@@ -4,7 +4,7 @@ async function getApiPokemons() {
     let apiPokemons = [];
     let nextUrl = 'https://pokeapi.co/api/v2/pokemon';
 
-    while (nextUrl && apiPokemons.length < 160) {
+    while (nextUrl && apiPokemons.length < 60) {
       const response = await axios.get(nextUrl);
       const pokemonsData = response.data.results;
 
@@ -33,8 +33,8 @@ async function getApiPokemons() {
       nextUrl = response.data.next;
     }
 
-    // Guardo sólo los primeros 151 pokemons.
-    const kantoPokemons = apiPokemons.slice(0, 151);
+    // Guardo sólo los primeros 60 pokemons.
+    const kantoPokemons = apiPokemons.slice(0, 60);
 
     return kantoPokemons;
 
